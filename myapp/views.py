@@ -1,8 +1,8 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 
-from myapp.models import Complaint, Users
+from myapp.models import Complaint, Users, Log
 
 
 def login_get(request):
@@ -28,7 +28,9 @@ def loginindex_post(request):
         messages.error(request, "No user found")
         return redirect('/myapp/loginindex_get/')
 
-
+def logout_get(request):
+    logout(request)
+    return redirect("/myapp/loginindex_get/")
 
 
 def forgot_get(request):
@@ -48,11 +50,20 @@ def viewcomplaint_get(request):
     return render(request,'admins/viewcomplaint.html',{'c':data})
 
 def viewlogs_get(request):
-    return render(request,'admins/viewlogs.html')
+    data=Log.objects.all()
+    return render(request,'admins/viewlogs.html',{'logs':data})
 
 def viewusers_get(request):
     data=Users.objects.all()
     return render(request,'admins/viewuser.html',{'Users': data})
+def viewblockedusers_get(request):
+    data=Users.objects.filter(status="Blocked")
+    return render(request,'admins/blockusers.html',{'Users': data})
+def blockuser_get(request,id):
+    Users.objects.filter(id=id).update(status="Blocked")
+    return redirect('/myapp/viewblockedusers_get/')
+
+
 
 def changepassword_get(request):
     return render(request,'admins/changepassword.html')

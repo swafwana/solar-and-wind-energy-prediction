@@ -26,6 +26,8 @@ urlpatterns = [
     path('loginindex_post/',views.loginindex_post),
     path('forgot_get/',views.forgot_get),
     path('forgot_post/',views.forgot_post),
+    path('logout_get/',views.logout_get),
+
     #ADMIN
     path('admin_home/',views.admin_home),
 
@@ -36,6 +38,8 @@ urlpatterns = [
     path('changepassword_post/',views.changepassword_post),
     path('sentreply_get/<id>',views.sentreply_get),
     path('sentreply_post/',views.sentreply_post),
+    path('viewblockedusers_get/',views.viewblockedusers_get),
+    path('blockuser_get/<id>',views.blockuser_get),
     #USER
     path('register_get/',views.register_get),
     path('register_post/',views.register_post),

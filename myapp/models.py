@@ -8,7 +8,9 @@ class Users(models.Model):
     email = models.CharField(max_length=100)
     phone = models.CharField(max_length=100)
     gender = models.CharField(max_length=100)
+    status = models.CharField(max_length=100)
     photo = models.CharField(max_length=100)
+
     AUTH_USER=models.OneToOneField(User,on_delete=models.CASCADE)
 
 class Complaint(models.Model):

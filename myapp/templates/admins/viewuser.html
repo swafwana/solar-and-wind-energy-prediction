@@ -38,9 +38,13 @@
 
           <td><img src="{{ i.photo  }}" class="img-thumbnail" width="50" /></td>
             <td>
+                {% if i.status == "Pending" %}
 
 
-                <a href="" class="btn btn-danger">Block</a>
+                <a href="/myapp/blockuser_get/{{ i.id }}" class="btn btn-danger">Block</a>
+            {% else %}
+                    {{ i.status }}
+                {%  endif %}
 
             </td>
         </tr>
