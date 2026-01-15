@@ -22,6 +22,8 @@ from myapp import views
 urlpatterns = [
     path('login_get/',views.login_get),
     path('login_post/',views.login_post),
+    path('loginindex_get/',views.loginindex_get),
+    path('loginindex_post/',views.loginindex_post),
     path('forgot_get/',views.forgot_get),
     path('forgot_post/',views.forgot_post),
     #ADMIN
@@ -32,7 +34,7 @@ urlpatterns = [
     path('viewusers_get/',views.viewusers_get),
     path('changepassword_get/',views.changepassword_get),
     path('changepassword_post/',views.changepassword_post),
-    path('sentreply_get/',views.sentreply_get),
+    path('sentreply_get/<id>',views.sentreply_get),
     path('sentreply_post/',views.sentreply_post),
     #USER
     path('register_get/',views.register_get),
