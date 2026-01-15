@@ -9,11 +9,13 @@
 <body>
   <div class="container">
     <h2 class="mb-4">Registration Form</h2>
-    <form>
+    <form method="post" action="/myapp/register_post/" enctype="multipart/form-data">
+        {% csrf_token %}
+
       <div class="row mb-3">
         <label for="name" class="col-sm-4 ">Full Name</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id="name" required>
+          <input type="text" class="form-control" id="name" name="name"  required>
         </div>
       </div>
 
@@ -21,11 +23,11 @@
         <label class="col-sm-4 ">Gender</label>
         <div class="col-sm-8">
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="gender" id="male" required>
+            <input class="form-check-input" type="radio" name="gender" id="male" value="male" required>
             <label class="form-check-label" for="male">Male</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="gender" id="female" required>
+            <input class="form-check-input" type="radio" name="gender" id="female" value="female" required>
             <label class="form-check-label" for="female">Female</label>
           </div>
         </div>
@@ -34,14 +36,14 @@
       <div class="row mb-3">
         <label for="dob" class="col-sm-4 ">Date of Birth</label>
         <div class="col-sm-8">
-          <input type="date" class="form-control" name="date" id="dob" required>
+          <input type="date" class="form-control" name="dob" id="dob" required>
         </div>
       </div>
 
       <div class="row mb-3">
         <label for="email" class="col-sm-4 ">Email address</label>
         <div class="col-sm-8">
-          <input type="email" class="form-control" name="date" id="email" required>
+          <input type="email" class="form-control" name="email" id="email" required>
         </div>
       </div>
 
@@ -71,7 +73,7 @@
       <div class="row mb-3">
         <label for="confirmPassword" class="col-sm-4 ">Confirm Password</label>
         <div class="col-sm-8">
-          <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" required>
+          <input type="password" class="form-control" name="confirmpassword" id="confirmPassword" required>
         </div>
       </div>
 

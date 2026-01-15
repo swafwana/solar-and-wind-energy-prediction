@@ -47,6 +47,7 @@ urlpatterns = [
     path('sentcomplaint_post/',views.sentcomplaint_post),
     path('viewprofile_get/',views.viewprofile_get),
     path('viewreply_get/',views.viewreply_get),
+    path('userhome_get/',views.userhome_get),
 
 
 
