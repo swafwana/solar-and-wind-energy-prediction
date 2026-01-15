@@ -1,5 +1,9 @@
+import datetime
+
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User,Group
+from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
 
 from myapp.models import Complaint, Users, Log
@@ -21,6 +25,8 @@ def loginindex_post(request):
         login(request,user)
         if user.groups.filter(name="admin"):
             return redirect('/myapp/admin_home/')
+        elif user.groups.filter(name="user"):
+            return redirect('/myapp/userhome_get/')
         else:
             messages.error(request,"No such group")
             return redirect('/myapp/loginindex_get/')
@@ -108,7 +114,39 @@ def register_get(request):
     return render(request,'users/register.html')
 
 def register_post(request):
-    return render(request,'users/register.html')
+    name=request.POST["name"]
+    dob=request.POST["dob"]
+    email=request.POST["email"]
+    phone=request.POST["phone"]
+    gender=request.POST["gender"]
+    photo=request.FILES["photo"]
+    password=request.POST["password"]
+    confirmpassword=request.POST["confirmpassword"]
+    if password!=confirmpassword:
+        messages.error(request,"Passwords did not match")
+        return redirect("/myapp/register_get/")
+    fs=FileSystemStorage()
+    date=datetime.datetime.now().strftime("%d-%M-%Y-%H-%M-%S")+'.jpg'
+    fs.save(date,photo)
+    path=fs.url(date)
+
+    user=User.objects.create_user(username=email,password=password)
+    user.groups.add(Group.objects.get(name='user'))
+    user.save()
+
+
+    u=Users()
+    u.name=name
+    u.dob=dob
+    u.email=email
+    u.phone=phone
+    u.gender=gender
+    u.photo=path
+    u.AUTH_USER=user
+    u.save()
+
+
+    return redirect('/myapp/loginindex_get/')
 
 def sentcomplaint_get(request):
     return render(request,'users/sentcomplaint.html')
@@ -121,3 +159,7 @@ def viewprofile_get(request):
 
 def viewreply_get(request):
     return render(request,'users/viewreply.html')
+
+def userhome_get(request):
+    return render(request,'users/userhome.html')
+
