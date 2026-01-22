@@ -155,8 +155,67 @@ def sentcomplaint_post(request):
     return render(request,'users/sentcomplaint.html')
 
 def viewprofile_get(request):
-    return render(request,'users/viewprofile.html')
+    data=Users.objects.get(AUTH_USER=request.user)
 
+
+    return render(request,'users/viewprofile.html',{'data': data})
+def user_changepassword_get(request):
+    return render(request,'users/changepassword.html')
+
+def user_changepassword_post(request):
+    current_password=request.POST["currentpassword"]
+    new_password = request.POST["newpassword"]
+    confirm_password = request.POST["confirmpassword"]
+    user=request.user
+    if not user.check_password(current_password):
+        messages.error(request,"Invalid  Password")
+        return redirect('/myapp/user_changepassword_get/')
+
+    if new_password != confirm_password:
+        messages.error(request, "Password doesn't match")
+        return redirect('/myapp/user_changepassword_get/')
+    user.set_password(new_password)
+    user.save()
+
+    return redirect('/myapp/loginindex_get/')
+def editprofile_get(request,id):
+    u = Users.objects.get(id=id)
+
+    return render(request,'users/edit.html',{'data':u})
+
+def editprofile_post(request):
+    name = request.POST["name"]
+    dob = request.POST["dob"]
+    email = request.POST["email"]
+    phone = request.POST["phone"]
+    gender = request.POST["gender"]
+    id = request.POST["id"]
+
+
+    u = Users.objects.get(id=id)
+    t=u.AUTH_USER
+    t.username=email
+    t.save()
+
+    if 'photo' in request.FILES:
+
+        photo = request.FILES["photo"]
+        fs = FileSystemStorage()
+        date = datetime.datetime.now().strftime("%d-%M-%Y-%H-%M-%S") + '.jpg'
+        fs.save(date, photo)
+        path = fs.url(date)
+        u.photo = path
+        u.save()
+
+    u.name = name
+    u.dob = dob
+    u.email = email
+    u.phone = phone
+    u.gender = gender
+    u.AUTH_USER = t
+    u.save()
+
+    return redirect("/myapp/viewprofile_get/")
 def viewreply_get(request):
     return render(request,'users/viewreply.html')
 
