@@ -13,38 +13,40 @@
       <div class="row mb-3">
         <label for="name" class="col-sm-4 ">Full Name</label>
         <div class="col-sm-8">
+            {{ data.name }}
+
         </div>
       </div>
 
       <div class="row mb-3">
         <label class="col-sm-4 ">Gender</label>
         <div class="col-sm-8">
-          <div class="form-check form-check-inline">
 
-          </div>
           <div class="form-check form-check-inline">
-
+        {{ data.gender }}
           </div>
         </div>
       </div>
 
       <div class="row mb-3">
-        <label for="dob" class="col-sm-4 ">Date of Birth</label>
+        <label for="dob" class="col-sm-4 " >Date of Birth</label>
         <div class="col-sm-8">
+            {{ data.dob }}
 
         </div>
       </div>
 
       <div class="row mb-3">
-        <label for="email" class="col-sm-4 ">Email address</label>
+        <label for="email" class="col-sm-4 " >Email address</label>
         <div class="col-sm-8">
-
+            {{ data.email }}
         </div>
       </div>
 
       <div class="row mb-3">
-        <label for="phone" class="col-sm-4 ">Phone Number</label>
+        <label for="phone" class="col-sm-4 " >Phone Number</label>
         <div class="col-sm-8">
+             {{ data.phone }}
 
         </div>
       </div>
@@ -54,6 +56,7 @@
       <div class="row mb-3">
         <label for="photo" class="col-sm-4 ">Photo</label>
         <div class="col-sm-8">
+            <img src=" {{ data.photo }}" height="100" width="100">
 
         </div>
       </div>
@@ -62,7 +65,7 @@
 
       <div class="row mb-3">
         <div class="offset-sm-4 col-sm-8">
-          <button type="submit" class="btn btn-primary">Edit</button>
+          <a href="/myapp/editprofile_get/{{ data.id }}" class="btn btn-primary">Edit</a>
         </div>
       </div>
     </form>

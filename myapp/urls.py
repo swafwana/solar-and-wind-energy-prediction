@@ -46,8 +46,14 @@ urlpatterns = [
     path('sentcomplaint_get/',views.sentcomplaint_get),
     path('sentcomplaint_post/',views.sentcomplaint_post),
     path('viewprofile_get/',views.viewprofile_get),
+    path('editprofile_get/<id>',views.editprofile_get),
+    path('editprofile_post/',views.editprofile_post),
+    path('user_changepassword_get/',views.user_changepassword_get),
+    path('user_changepassword_post/',views.user_changepassword_post),
     path('viewreply_get/',views.viewreply_get),
     path('userhome_get/',views.userhome_get),
+
+
 
 
 
