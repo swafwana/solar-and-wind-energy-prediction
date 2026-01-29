@@ -152,7 +152,16 @@ def sentcomplaint_get(request):
     return render(request,'users/sentcomplaint.html')
 
 def sentcomplaint_post(request):
-    return render(request,'users/sentcomplaint.html')
+    comp= request.POST["complaint"]
+    c= Complaint()
+    c.date=datetime.datetime.now().date()
+    c.complaint=comp
+    c.reply="Pending"
+    c.status="Pending"
+
+    c.USER=Users.objects.get(AUTH_USER=request.user)
+    c.save()
+    return redirect("/myapp/viewreply_get/")
 
 def viewprofile_get(request):
     data=Users.objects.get(AUTH_USER=request.user)
@@ -217,7 +226,10 @@ def editprofile_post(request):
 
     return redirect("/myapp/viewprofile_get/")
 def viewreply_get(request):
-    return render(request,'users/viewreply.html')
+    data = Complaint.objects.filter(USER__AUTH_USER=request.user)
+
+    return render(request, 'users/viewreply.html', {'c': data})
+
 
 def userhome_get(request):
     return render(request,'users/userhome.html')
