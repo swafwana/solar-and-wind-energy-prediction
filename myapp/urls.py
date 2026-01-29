@@ -52,6 +52,8 @@ urlpatterns = [
     path('user_changepassword_post/',views.user_changepassword_post),
     path('viewreply_get/',views.viewreply_get),
     path('userhome_get/',views.userhome_get),
+    path('loadsolar_get/',views.loadsolar_get),
+    path('loadwind_get/',views.loadwind_get),
 
 
 
