@@ -8,23 +8,19 @@
 <body>
   <div class="container mt-5">
     <h4 class="mb-4">Send a Complaint</h4>
-    <form>
-      
+    <form method="post" action="/myapp/sentcomplaint_post/">
+      {% csrf_token %}
 
       <!-- Complaint Text -->
       <div class="mb-3">
         <label for="complaint" class="form-label">Complaint</label>
-        <textarea class="form-control" id="complaint"  rows="4" placeholder="Write your complaint here..." required></textarea>
+        <textarea class="form-control" id="complaint"  rows="4" placeholder="Write your complaint here..." required name="complaint"></textarea>
       </div>
 
-      <!-- Optional File Upload -->
-      <div class="mb-3">
-        <label for="photo" class="form-label">Attach Photo (optional)</label>
-        <input type="file" class="form-control" name="photo" id="photo" accept="image/*">
-      </div>
+
 
       <!-- Submit Button -->
-      <button type="submit" class="btn btn-primary">Send Complaint</button>
+      <button type="submit" class="btn btn-primary" >Send Complaint</button>
     </form>
   </div>
 
