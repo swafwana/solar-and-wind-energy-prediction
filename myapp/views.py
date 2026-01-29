@@ -234,3 +234,24 @@ def viewreply_get(request):
 def userhome_get(request):
     return render(request,'users/userhome.html')
 
+def loadsolar_get(request):
+    import pandas
+    p="C:\\Users\\HK Technology\\PycharmProjects\\solar_and_wind_energy_prediction\\myapp\\Dataset\\Solar\\Weather_Data_reordered_all1.csv"
+    data = pandas.read_csv(p)
+    print(data.values)
+
+
+    return render(request,'users/loadsolar.html',{'c':data.values})
+def loadwind_get(request):
+    import pandas
+    p="C:\\Users\\HK Technology\\PycharmProjects\\solar_and_wind_energy_prediction\\myapp\\Dataset\\Wind\\Location1.csv"
+
+    data=pandas.read_csv(p)
+    print(data.values)
+
+
+
+
+
+
+    return render(request,'users/loadwind.html',{'c':data.values})
