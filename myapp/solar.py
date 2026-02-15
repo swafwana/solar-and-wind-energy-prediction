@@ -1,10 +1,14 @@
 import pandas
 import numpy
-p = "C:\\Users\\HK Technology\\PycharmProjects\\solar_and_wind_energy_prediction\\myapp\\Dataset\\Solar\\Weather_Data_reordered_all2.csv"
+p = "C:\\Users\\HK Technology\\PycharmProjects\\solar_and_wind_energy_prediction\\myapp\\Dataset\\Solar\\Weather_Data_reordered_all3.csv"
 weatherdata = pandas.read_csv(p)
 # print(weatherdata.values)
-s = r"C:\Users\HK Technology\PycharmProjects\solar_and_wind_energy_prediction\myapp\Dataset\Solar\Solar_Energy_Generation1.csv"
-solardata=pandas.read_csv(s)
+s = r"C:\Users\HK Technology\PycharmProjects\solar_and_wind_energy_prediction\myapp\Dataset\Solar\Solar_Energy_Generation2.csv"
+# solardata=pandas.read_csv(s)
+solardata = pandas.read_csv(s, sep="\t")
+
+print(solardata.shape)
+
 # print(solardata.values)
 
 
@@ -24,7 +28,8 @@ for i in weatherdata.values:
         # print(i[1],j[2])
 
         dt_a = datetime.strptime(i[1], "%d/%m/%Y %H:%M")
-        dt_b = datetime.fromisoformat(j[2])
+        # dt_b = datetime.fromisoformat(j[2])
+        dt_b = datetime.strptime(j[2], "%m/%d/%Y %H:%M")
 
         # print("=====",dt_a,dt_b)
 

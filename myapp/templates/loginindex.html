@@ -1,58 +1,132 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#    <head>#}
+{#        <meta charset="utf-8">#}
+{#        <title>HTML Codex - Login Form Template</title>#}
+{#        <meta content="width=device-width, initial-scale=1.0" name="viewport">#}
+{#        <meta content="Login Form Template" name="keywords">#}
+{#        <meta content="Login Form Template" name="description">#}
+{##}
+{#        <!-- Favicon -->#}
+{#        <link href="/static/login/img/favicon.ico" rel="icon">#}
+{##}
+{#        <!-- Stylesheet -->#}
+{#        <link href="/static/login/css/style.css" rel="stylesheet">#}
+{#    </head>#}
+{#    <body>#}
+{#        <div class="wrapper login-3">#}
+{#            <div class="container">#}
+{#                <div class="col-left">#}
+{#                    <div class="login-text">#}
+{#                        <h2><img src="/static/login/img/logo.png" alt="Logo"></h2>#}
+{#                        <p>#}
+{#                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada vel libero vitae eleifend. Fusce tristique ipsum lorem.#}
+{#                        </p>#}
+{#                        <a class="btn" href="">Read More</a>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-right">#}
+{#                    <div class="login-form">#}
+{#                        <h2>Login</h2>#}
+{#                        <form method="post" action="/myapp/loginindex_post/">#}
+{#                            {% csrf_token %}#}
+{#                            <p>#}
+{#                                <input type="text" placeholder="Username" name="username" required>#}
+{#                            </p>#}
+{#                            <p>#}
+{#                                <input type="password" placeholder="Password" name="password" required>#}
+{#                            </p>#}
+{#                            <p>#}
+{#                                <input class="btn" type="submit" value="Sign In" />#}
+{#                            </p>#}
+{#                            <p>#}
+{#                                <a href="">Forget password?</a>#}
+{#                                <a href="/myapp/register_get/">Create an account.</a>#}
+{#                            </p>#}
+{#                        </form>#}
+{#                        {% for j in messages %}#}
+{#                        {{ j }}#}
+{#                        {% endfor %}#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            #}
+{#        </div>#}
+{#    </body>#}
+{#</html>#}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>HTML Codex - Login Form Template</title>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="Login Form Template" name="keywords">
-        <meta content="Login Form Template" name="description">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login · Solar & Wind Energy Prediction</title>
 
-        <!-- Favicon -->
-        <link href="/static/login/img/favicon.ico" rel="icon">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-        <!-- Stylesheet -->
-        <link href="/static/login/css/style.css" rel="stylesheet">
-    </head>
-    <body>
-        <div class="wrapper login-3">
-            <div class="container">
-                <div class="col-left">
-                    <div class="login-text">
-                        <h2><img src="/static/login/img/logo.png" alt="Logo"></h2>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada vel libero vitae eleifend. Fusce tristique ipsum lorem.
-                        </p>
-                        <a class="btn" href="">Read More</a>
-                    </div>
+    <!-- Link to external CSS -->
+      <link href="/static/login/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="login-wrapper">
+        <div class="login-card">
+            <!-- Left Panel - Brand Message -->
+            <div class="brand-panel">
+                <div class="logo-container">
+                    <i class="fas fa-sun logo-sun"></i>
+                    <i class="fas fa-wind logo-wind"></i>
                 </div>
-                <div class="col-right">
-                    <div class="login-form">
-                        <h2>Login</h2>
-                        <form method="post" action="/myapp/loginindex_post/">
-                            {% csrf_token %}
-                            <p>
-                                <input type="text" placeholder="Username" name="username" required>
-                            </p>
-                            <p>
-                                <input type="password" placeholder="Password" name="password" required>
-                            </p>
-                            <p>
-                                <input class="btn" type="submit" value="Sign In" />
-                            </p>
-                            <p>
-                                <a href="">Forget password?</a>
-                                <a href="/myapp/register_get/">Create an account.</a>
-                            </p>
-                        </form>
-                        {% for j in messages %}
-                        {{ j }}
-                        {% endfor %}
-                    </div>
+
+                <h2 class="brand-title">Solar & Wind<br>Energy Prediction</h2>
+
+
+                <div class="brand-footer">
+                    <i class="fas fa-solar-panel"></i>
+                    <i class="fas fa-wind"></i>
+                    <i class="fas fa-cloud-sun"></i>
                 </div>
             </div>
-            <div class="credit">
-                Template by <a href="https://htmlcodex.com">HTML Codex</a>
+
+            <!-- Right Panel - Login Form -->
+            <div class="form-panel">
+                <h3 class="form-title">Login</h3>
+
+                <form method="post" action="/myapp/loginindex_post/">
+                    {% csrf_token %}
+
+                    <div class="input-group">
+                        <label for="username">
+                            <i class="far fa-user"></i> Username
+                        </label>
+                        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="password">
+                            <i class="fas fa-lock"></i> Password
+                        </label>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    </div>
+
+                    <button type="submit" class="signin-btn">
+                        Sign In <i class="fas fa-sign-in-alt"></i>
+                    </button>
+
+                    <div class="form-links">
+                        <a href="#" class="forgot-link">Forget password?</a>
+                        <a href="/myapp/register_get/" class="create-link">Create an account.</a>
+                    </div>
+                </form>
+
+                <!-- Messages -->
+                {% for j in messages %}
+                <div class="message-box">
+                    <i class="fas fa-info-circle"></i> {{ j }}
+                </div>
+                {% endfor %}
+
             </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>
