@@ -27,13 +27,14 @@ for i in weatherdata.values:
     for j in solardata.values:
         # print(i[1],j[2])
 
-        dt_a = datetime.strptime(i[1], "%d/%m/%Y %H:%M")
+        dt_a = datetime.strptime(i[1], "%m/%d/%Y %H:%M")
         # dt_b = datetime.fromisoformat(j[2])
         dt_b = datetime.strptime(j[2], "%m/%d/%Y %H:%M")
 
         # print("=====",dt_a,dt_b)
 
         if dt_a==dt_b:
+
 
             m=[
                 i[1],
@@ -90,12 +91,10 @@ dfnullremoved=dfduplicatesemoved.dropna()
 
 
 
-for c in dfnullremoved.columns():
+for c in dfnullremoved.columns:
     if dfnullremoved[c].dtype in [numpy.float64, numpy.int64]:
         median_value = dfnullremoved[c].median(skipna=True)
-        dfnullremoved[c].fillna(median_value,inplace=True)
-
-
+        dfnullremoved[c] = dfnullremoved[c].fillna(median_value)
 
 dfnullremoved.to_csv("C:\\Users\\HK Technology\\PycharmProjects\\solar_and_wind_energy_prediction\\myapp\\Dataset\\Solar\\preprocessed.csv")
 

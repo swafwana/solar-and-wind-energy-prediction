@@ -54,6 +54,8 @@ urlpatterns = [
     path('userhome_get/',views.userhome_get),
     path('loadsolar_get/',views.loadsolar_get),
     path('loadwind_get/',views.loadwind_get),
+    path('solarinput_get/',views.solarinput_get),
+    path('solarinput_post/',views.solarinput_post),
 
 
 

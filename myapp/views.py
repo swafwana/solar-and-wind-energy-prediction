@@ -8,7 +8,8 @@ from django.shortcuts import render, redirect
 
 from myapp.models import Complaint, Users, Log
 
-
+from django.http import JsonResponse
+import json
 def login_get(request):
     return render(request,'login.html')
 
@@ -149,7 +150,7 @@ def register_post(request):
     return redirect('/myapp/loginindex_get/')
 
 def sentcomplaint_get(request):
-    return render(request,'users/sentcomplaint.html')
+    return render(request,'Users/sentcomplaint.html')
 
 def sentcomplaint_post(request):
     comp= request.POST["complaint"]
@@ -167,9 +168,9 @@ def viewprofile_get(request):
     data=Users.objects.get(AUTH_USER=request.user)
 
 
-    return render(request,'users/viewprofile.html',{'data': data})
+    return render(request,'Users/viewprofile.html',{'data': data})
 def user_changepassword_get(request):
-    return render(request,'users/changepassword.html')
+    return render(request,'Users/changepassword.html')
 
 def user_changepassword_post(request):
     current_password=request.POST["currentpassword"]
@@ -190,7 +191,7 @@ def user_changepassword_post(request):
 def editprofile_get(request,id):
     u = Users.objects.get(id=id)
 
-    return render(request,'users/edit.html',{'data':u})
+    return render(request,'Users/edit.html',{'data':u})
 
 def editprofile_post(request):
     name = request.POST["name"]
@@ -228,30 +229,157 @@ def editprofile_post(request):
 def viewreply_get(request):
     data = Complaint.objects.filter(USER__AUTH_USER=request.user)
 
-    return render(request, 'users/viewreply.html', {'c': data})
+    return render(request, 'Users/viewreply.html', {'c': data})
 
 
 def userhome_get(request):
-    return render(request,'users/userhome.html')
+    return render(request,'Users/userhome.html')
 
 def loadsolar_get(request):
     import pandas
-    p="C:\\Users\\HK Technology\\PycharmProjects\\solar_and_wind_energy_prediction\\myapp\\Dataset\\Solar\\Weather_Data_reordered_all1.csv"
+    p="C:\\Users\\HK Technology\\PycharmProjects\\solar_and_wind_energy_prediction\\myapp\\Dataset\\Solar\\Weather_Data_reordered_all3.csv"
     data = pandas.read_csv(p)
     print(data.values)
 
 
-    return render(request,'users/loadsolar.html',{'c':data.values})
+    return render(request,'Users/loadsolar.html',{'c':data.values})
 def loadwind_get(request):
     import pandas
     p="C:\\Users\\HK Technology\\PycharmProjects\\solar_and_wind_energy_prediction\\myapp\\Dataset\\Wind\\Location1.csv"
 
     data=pandas.read_csv(p)
     print(data.values)
+    return render(request,'Users/loadwind.html',{'c':data.values})
+
+def solarinput_get(request):
+    return render(request, 'Users/solarinput.html')
+
+import pandas as pd
+from django.shortcuts import render
+
+# Load CSV only once (when server starts)
+file_path = r"C:\Users\HK Technology\PycharmProjects\solar_and_wind_energy_prediction\myapp\Dataset\Solar\preprocessed.csv"
+
+df = pd.read_csv(file_path)
+
+# Convert CSV Timestamp column to datetime
+df["Timestamp"] = pd.to_datetime(df["Timestamp"])
 
 
+# def solarinput_post(request):
+#
+#     if request.method == "POST":
+#
+#         date = request.POST.get("date")        # 2020-01-02
+#         time = request.POST.get("timestamp")   # 08:00
+#
+#         # Combine and convert to datetime
+#         full_timestamp = pd.to_datetime(date + " " + time)
+#
+#         # Match using datetime
+#         result = df[df["Timestamp"] == full_timestamp]
+#
+#         if not result.empty:
+#             solar_generation = result.iloc[0]["SolarGeneration"]
+#         else:
+#             solar_generation = "No matching data found"
+#         print("solar_energy:",solar_generation)
+#
+#         return render(request, "Users/solarinput.html", {
+#             "solar_generation": solar_generation
+#         })
+#
+#     return render(request, "Users/solarinput.html")
+#
+# def solarinput_post(request):
+#
+#     if request.method == "POST":
+#
+#         try:
+#             data = json.loads(request.body)
+#
+#             date = data.get("date")
+#             time = data.get("timestamp")
+#
+#             if not date or not time:
+#                 return JsonResponse({"error": "Date or Time missing"}, status=400)
+#
+#             full_timestamp = pd.to_datetime(date + " " + time)
+#
+#             result = df[df["Timestamp"] == full_timestamp]
+#
+#             if not result.empty:
+#                 solar_generation = result.iloc[0]["SolarGeneration"]
+#             else:
+#                 solar_generation = "No matching data found"
+#
+#             return JsonResponse({
+#                 "solar_generation": solar_generation
+#             })
+#
+#         except Exception as e:
+#             return JsonResponse({"error": str(e)}, status=500)
+#
+#     return JsonResponse({"error": "Invalid request"}, status=400)
 
 
+import json
+import pandas as pd
+import joblib
+from django.http import JsonResponse
 
+model = joblib.load("solar_model.pkl")
 
-    return render(request,'users/loadwind.html',{'c':data.values})
+def solarinput_post(request):
+
+    if request.method == "POST":
+
+        try:
+            data = json.loads(request.body)
+
+            timestamp = data.get("timestamp")
+            apparent_temp = float(data.get("ApparentTemperature"))
+            air_temp = float(data.get("AirTemperature"))
+            dew_temp = float(data.get("DewPointTemperature"))
+            humidity = float(data.get("RelativeHumidity"))
+            wind_speed = float(data.get("WindSpeed"))
+            wind_direction = float(data.get("WindDirection"))
+
+            if not timestamp:
+                return JsonResponse({"error": "Timestamp missing"}, status=400)
+
+            full_timestamp = pd.to_datetime(timestamp)
+
+            hour = full_timestamp.hour
+            month = full_timestamp.month
+
+            input_data = pd.DataFrame([[
+                apparent_temp,
+                air_temp,
+                dew_temp,
+                humidity,
+                wind_speed,
+                wind_direction,
+                hour,
+                month
+            ]], columns=[
+                "ApparentTemperature",
+                "AirTemperature",
+                "DewPointTemperature",
+                "RelativeHumidity",
+                "WindSpeed",
+                "WindDirection",
+                "hour",
+                "month"
+            ])
+
+            prediction = model.predict(input_data)[0]
+
+            return JsonResponse({
+                "predicted_solar_generation": float(prediction)
+            })
+
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
+
+    return JsonResponse({"error": "Invalid request"}, status=400)
