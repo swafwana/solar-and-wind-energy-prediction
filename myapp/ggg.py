@@ -41,8 +41,11 @@ model = RandomForestRegressor(
 model.fit(X_train, y_train)
 
 # Accuracy
+train_score = model.score(X_train, y_train)
+print("Train R2:", train_score)
 score = model.score(X_test, y_test)
 print("R2 Score:", score)
 
+
 # Save model
-joblib.dump(model, "solar_model1.pkl")
+joblib.dump(model, "solar_model.pkl")

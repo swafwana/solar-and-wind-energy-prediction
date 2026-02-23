@@ -285,19 +285,59 @@
   </div>
 
 <script>
-function generateSolar() {
+{#function generateSolar() {#}
+{##}
+{#    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;#}
+{##}
+{#    const data = {#}
+{#        date: document.getElementById("date").value,#}
+{#        timestamp: document.getElementById("timestamp").value,#}
+{#        apparenttemperature: document.getElementById("apparenttemperature").value,#}
+{#        airtemperature: document.getElementById("airtemperature").value,#}
+{#        dewpointtemperature: document.getElementById("dewpointtemperature").value,#}
+{#        relativehumidity: document.getElementById("relativehumidity").value,#}
+{#        windspeed: document.getElementById("windspeed").value,#}
+{#        winddirection: document.getElementById("winddirection").value#}
+{#    };#}
+{##}
+{#    fetch("/myapp/solarinput_post/", {#}
+{#        method: "POST",#}
+{#        headers: {#}
+{#            "Content-Type": "application/json",#}
+{#            "X-CSRFToken": csrfToken#}
+{#        },#}
+{#        body: JSON.stringify(data)#}
+{#    })#}
+{#    .then(response => response.json())#}
+{#    .then(result => {#}
+{##}
+{#        if(result.error){#}
+{#            document.getElementById("result").innerHTML = result.error;#}
+{#        } else {#}
+{#            document.getElementById("result").innerHTML =#}
+{#                "Expected Solar Generation: " + result.solar_generation + " kWh";#}
+{#        }#}
+{#    })#}
+{#    .catch(error => {#}
+{#        document.getElementById("result").innerHTML = "Server Error";#}
+{#        console.error(error);#}
+{#    });#}
+{#}#}
+    function generateSolar() {
 
     const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
+    const date = document.getElementById("date").value;
+    const time = document.getElementById("timestamp").value;
+
     const data = {
-        date: document.getElementById("date").value,
-        timestamp: document.getElementById("timestamp").value,
-        apparenttemperature: document.getElementById("apparenttemperature").value,
-        airtemperature: document.getElementById("airtemperature").value,
-        dewpointtemperature: document.getElementById("dewpointtemperature").value,
-        relativehumidity: document.getElementById("relativehumidity").value,
-        windspeed: document.getElementById("windspeed").value,
-        winddirection: document.getElementById("winddirection").value
+        timestamp: date + " " + time,
+        ApparentTemperature: document.getElementById("apparenttemperature").value,
+        AirTemperature: document.getElementById("airtemperature").value,
+        DewPointTemperature: document.getElementById("dewpointtemperature").value,
+        RelativeHumidity: document.getElementById("relativehumidity").value,
+        WindSpeed: document.getElementById("windspeed").value,
+        WindDirection: document.getElementById("winddirection").value
     };
 
     fetch("/myapp/solarinput_post/", {
@@ -310,12 +350,11 @@ function generateSolar() {
     })
     .then(response => response.json())
     .then(result => {
-
         if(result.error){
             document.getElementById("result").innerHTML = result.error;
         } else {
             document.getElementById("result").innerHTML =
-                "Expected Solar Generation: " + result.solar_generation + " kWh";
+                "Expected Solar Generation: " + result.predicted_solar_generation + " kWh";
         }
     })
     .catch(error => {

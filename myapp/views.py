@@ -327,8 +327,13 @@ import json
 import pandas as pd
 import joblib
 from django.http import JsonResponse
+#
+# model = joblib.load("solar_model.pkl")
+import os
+from django.conf import settings
 
-model = joblib.load("solar_model.pkl")
+model_path = os.path.join(settings.BASE_DIR, "myapp", "solar_model.pkl")
+model = joblib.load(model_path)
 
 def solarinput_post(request):
 
