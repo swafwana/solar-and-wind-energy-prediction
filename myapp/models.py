@@ -28,7 +28,7 @@ class Review(models.Model):
 
 class Log(models.Model):
     date = models.DateField()
-    time=models.DateTimeField()
+    time=models.TimeField()
     result=models.CharField(max_length=100)
     USER = models.ForeignKey(Users, on_delete=models.CASCADE)
 

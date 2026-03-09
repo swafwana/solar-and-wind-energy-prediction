@@ -350,15 +350,21 @@
     })
     .then(response => response.json())
     .then(result => {
+
         if(result.error){
-            document.getElementById("result").innerHTML = result.error;
+            alert("Error: " + result.error);
         } else {
-            document.getElementById("result").innerHTML =
-                "Expected Solar Generation: " + result.predicted_solar_generation + " kWh";
+
+            let message = "Expected Solar Generation: " + result.predicted_solar_generation + " kWh";
+
+            document.getElementById("result").innerHTML = message;
+
+            alert(message);   // dialog box
         }
+
     })
     .catch(error => {
-        document.getElementById("result").innerHTML = "Server Error";
+        alert("Server Error");
         console.error(error);
     });
 }

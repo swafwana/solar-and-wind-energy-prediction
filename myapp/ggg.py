@@ -42,10 +42,60 @@ model.fit(X_train, y_train)
 
 # Accuracy
 train_score = model.score(X_train, y_train)
-print("Train R2:", train_score)
+print("Train R2 Score:", train_score)
 score = model.score(X_test, y_test)
-print("R2 Score:", score)
+print("Test R2 Score:", score)
 
 
 # Save model
 joblib.dump(model, "solar_model.pkl")
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+# Predict on test data
+y_pred = model.predict(X_test)
+
+# ===============================
+# 1️⃣ ACTUAL vs PREDICTED
+# ===============================
+plt.figure(figsize=(8,6))
+plt.scatter(y_test, y_pred)
+plt.plot([y_test.min(), y_test.max()],
+         [y_test.min(), y_test.max()])
+
+plt.xlabel("Actual Solar Generation")
+plt.ylabel("Predicted Solar Generation")
+plt.title("Actual vs Predicted Solar Generation")
+plt.show()
+
+
+# ===============================
+# 2️⃣ FEATURE IMPORTANCE
+# ===============================
+importance = model.feature_importances_
+feature_names = X.columns
+
+feat_imp = pd.Series(importance, index=feature_names)
+feat_imp = feat_imp.sort_values()
+
+plt.figure(figsize=(8,6))
+feat_imp.plot(kind='barh')
+
+plt.xlabel("Importance Score")
+plt.title("Feature Importance")
+plt.show()
+
+
+# ===============================
+# 3️⃣ SOLAR GENERATION vs HOUR
+# ===============================
+hourly_avg = df.groupby("hour")["SolarGeneration"].mean()
+
+plt.figure(figsize=(8,6))
+hourly_avg.plot()
+
+plt.xlabel("Hour of Day")
+plt.ylabel("Average Solar Generation")
+plt.title("Average Solar Generation by Hour")
+plt.show()

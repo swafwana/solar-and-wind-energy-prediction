@@ -1,5 +1,4 @@
-import datetime
-
+from datetime import datetime
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User,Group
@@ -127,7 +126,7 @@ def register_post(request):
         messages.error(request,"Passwords did not match")
         return redirect("/myapp/register_get/")
     fs=FileSystemStorage()
-    date=datetime.datetime.now().strftime("%d-%M-%Y-%H-%M-%S")+'.jpg'
+    date=datetime.now().strftime("%d-%M-%Y-%H-%M-%S")+'.jpg'
     fs.save(date,photo)
     path=fs.url(date)
 
@@ -155,7 +154,7 @@ def sentcomplaint_get(request):
 def sentcomplaint_post(request):
     comp= request.POST["complaint"]
     c= Complaint()
-    c.date=datetime.datetime.now().date()
+    c.date=datetime.now().date()
     c.complaint=comp
     c.reply="Pending"
     c.status="Pending"
@@ -188,8 +187,8 @@ def user_changepassword_post(request):
     user.save()
 
     return redirect('/myapp/loginindex_get/')
-def editprofile_get(request,id):
-    u = Users.objects.get(id=id)
+def editprofile_get(request):
+    u = Users.objects.get(AUTH_USER_id=request.user.id)
 
     return render(request,'Users/edit.html',{'data':u})
 
@@ -211,7 +210,7 @@ def editprofile_post(request):
 
         photo = request.FILES["photo"]
         fs = FileSystemStorage()
-        date = datetime.datetime.now().strftime("%d-%M-%Y-%H-%M-%S") + '.jpg'
+        date = datetime.now().strftime("%d-%M-%Y-%H-%M-%S") + '.jpg'
         fs.save(date, photo)
         path = fs.url(date)
         u.photo = path
@@ -336,7 +335,7 @@ model_path = os.path.join(settings.BASE_DIR, "myapp", "solar_model.pkl")
 model = joblib.load(model_path)
 
 def solarinput_post(request):
-
+    from datetime import datetime
     if request.method == "POST":
 
         try:
@@ -379,9 +378,97 @@ def solarinput_post(request):
             ])
 
             prediction = model.predict(input_data)[0]
+            # print(prediction,"pppppppppppppppppppppppppppppppp")
+
+            l=Log()
+
+            # from datetime import datetime
+            l.date=datetime.now().date()
+            l.time=datetime.now().time()
+            l.result=float(prediction)
+            l.USER = Users.objects.get(AUTH_USER=request.user)
+            l.save()
+
+
+
+
 
             return JsonResponse({
                 "predicted_solar_generation": float(prediction)
+            })
+
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
+
+    return JsonResponse({"error": "Invalid request"}, status=400)
+
+def windinput_get(request):
+    return render(request,'Users/windinput.html')
+import json
+import pandas as pd
+import joblib
+from django.http import JsonResponse
+
+
+# load model once
+model_wind = joblib.load("C://Users//HK Technology//PycharmProjects//solar_and_wind_energy_prediction//myapp//power_prediction_model1.pkl")
+
+
+def windinput_post(request):
+
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+
+            timestamp = data.get("timestamp")
+
+            temperature_2m = float(data.get("temperature_2m"))
+            relativehumidity_2m = float(data.get("relativehumidity_2m"))
+            dewpoint_2m = float(data.get("dewpoint_2m"))
+            windspeed_10m = float(data.get("windspeed_10m"))
+            windspeed_100m = float(data.get("windspeed_100m"))
+            winddirection_10m = float(data.get("winddirection_10m"))
+            winddirection_100m = float(data.get("winddirection_100m"))
+            windgusts_10m = float(data.get("windgusts_10m"))
+
+            if not timestamp:
+                return JsonResponse({"error": "Timestamp missing"}, status=400)
+
+            # convert timestamp
+            dt = datetime.fromisoformat(timestamp)
+
+            hour = dt.hour
+            month = dt.month
+
+            # create dataframe in same order as training
+            input_data = pd.DataFrame([[
+                temperature_2m,
+                relativehumidity_2m,
+                dewpoint_2m,
+                windspeed_10m,
+                windspeed_100m,
+                winddirection_10m,
+                winddirection_100m,
+                windgusts_10m,
+                hour,
+                month
+            ]], columns=[
+                "temperature_2m",
+                "relativehumidity_2m",
+                "dewpoint_2m",
+                "windspeed_10m",
+                "windspeed_100m",
+                "winddirection_10m",
+                "winddirection_100m",
+                "windgusts_10m",
+                "hour",
+                "month"
+            ])
+
+            prediction = model_wind.predict(input_data)
+
+            return JsonResponse({
+                "predicted_power": float(prediction[0])
             })
 
         except Exception as e:
