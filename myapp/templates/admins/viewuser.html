@@ -23,7 +23,7 @@
             <th>Phone</th>
           <th>Gender</th>
           <th>Photo</th>
-            <th>Action</th>
+{#            <th>Action</th>#}
 
         </tr>
       </thead>
@@ -39,16 +39,16 @@
           <td>{{ i.gender }}</td>
 
           <td><img src="{{ i.photo  }}" class="img-thumbnail" width="50" /></td>
-            <td>
-                {% if i.status == "Pending" %}
-
-
-                <a href="/myapp/blockuser_get/{{ i.id }}" class="btn btn-danger">Block</a>
-            {% else %}
-                    {{ i.status }}
-                {%  endif %}
-
-            </td>
+{#            <td>#}
+{#                {% if i.status == "Pending" %}#}
+{##}
+{##}
+{#                <a href="/myapp/blockuser_get/{{ i.id }}" class="btn btn-danger">Block</a>#}
+{#            {% else %}#}
+{#                    {{ i.status }}#}
+{#                {%  endif %}#}
+{##}
+{#            </td>#}
         </tr>
         {% endfor %}
         <!-- Add more rows dynamically from backend -->

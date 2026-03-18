@@ -20,9 +20,11 @@ from django.urls import path
 from myapp import views
 
 urlpatterns = [
-    path('login_get/',views.login_get),
-    path('login_post/',views.login_post),
-    path('loginindex_get/',views.loginindex_get),
+
+
+    # path('loginindex_get/',views.loginindex_get),
+
+    path('loginindex_get/', views.loginindex_get),
     path('loginindex_post/',views.loginindex_post),
     path('forgot_get/',views.forgot_get),
     path('forgot_post/',views.forgot_post),

@@ -9,11 +9,11 @@ from myapp.models import Complaint, Users, Log
 
 from django.http import JsonResponse
 import json
-def login_get(request):
-    return render(request,'login.html')
-
-def login_post(request):
-    return render(request,'login.html')
+# def login_get(request):
+#     return render(request,'login.html')
+#
+# def login_post(request):
+#     return render(request,'login.html')
 def loginindex_get(request):
     return render(request,'loginindex.html')
 
@@ -386,6 +386,7 @@ def solarinput_post(request):
             l.date=datetime.now().date()
             l.time=datetime.now().time()
             l.result=float(prediction)
+            l.prediction_type = "solar"
             l.USER = Users.objects.get(AUTH_USER=request.user)
             l.save()
 
@@ -467,9 +468,19 @@ def windinput_post(request):
 
             prediction = model_wind.predict(input_data)
 
+            l_wind = Log()
+
+            l_wind.date = datetime.now().date()
+            l_wind.time = datetime.now().time()
+            l_wind.result = float(prediction[0])  # FIXED
+            l_wind.prediction_type = "wind"
+            l_wind.USER = Users.objects.get(AUTH_USER=request.user)
+            l_wind.save()
+
             return JsonResponse({
                 "predicted_power": float(prediction[0])
             })
+
 
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=500)

@@ -26,10 +26,12 @@ class Review(models.Model):
     rating=models.CharField(max_length=100)
     USER = models.ForeignKey(Users, on_delete=models.CASCADE)
 
+
 class Log(models.Model):
     date = models.DateField()
     time=models.TimeField()
     result=models.CharField(max_length=100)
+    prediction_type = models.CharField(max_length=20)
     USER = models.ForeignKey(Users, on_delete=models.CASCADE)
 
 
