@@ -1,0 +1,45 @@
+/* Base styles shared across all pages */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #fff4e6 0%, #ffffff 100%);
+    min-height: 100vh;
+}
+
+/* Orange accent color */
+:root {
+    --orange: #f97316;
+    --orange-dark: #ea580c;
+    --orange-light: #fff7ed;
+    --orange-border: #fed7aa;
+}
+
+/* Reusable button style */
+.btn-orange {
+    background: var(--orange);
+    color: white;
+    border: none;
+    padding: 0.9rem;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-orange:hover {
+    background: var(--orange-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
+}
+
+/* Reusable input focus */
+input:focus {
+    outline: none;
+    border-color: var(--orange) !important;
+    box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.1) !important;
+}

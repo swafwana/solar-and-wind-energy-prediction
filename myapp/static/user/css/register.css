@@ -1,0 +1,185 @@
+/* Registration Page - Matching Login Style */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #fff4e6 0%, #ffffff 100%);
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+    padding: 2rem 1rem;
+}
+
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Header */
+h2 {
+    color: #1a1a1a;
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem !important;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f97316;
+    display: inline-block;
+}
+
+/* Form Labels */
+.row.mb-3 label {
+    color: #1a1a1a;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding-top: 0.5rem;
+}
+
+/* Form Controls */
+.form-control {
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+}
+
+.form-control:focus {
+    border-color: #f97316;
+    box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.1);
+    outline: none;
+}
+
+/* Radio Buttons */
+.form-check-input {
+    cursor: pointer;
+}
+
+.form-check-input:checked {
+    background-color: #f97316;
+    border-color: #f97316;
+}
+
+.form-check-input:focus {
+    border-color: #f97316;
+    box-shadow: 0 0 0 0.2rem rgba(249, 115, 22, 0.1);
+}
+
+.form-check-label {
+    color: #4b5563;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+/* Date Input */
+input[type="date"] {
+    color: #4b5563;
+}
+
+/* File Input */
+input[type="file"] {
+    padding: 0.5rem;
+    color: #4b5563;
+}
+
+input[type="file"]::file-selector-button {
+    background: #f97316;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-right: 1rem;
+    transition: background 0.2s;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background: #ea580c;
+}
+
+/* Register Button */
+.btn-primary {
+    background: #f97316;
+    border: none;
+    padding: 0.8rem 2.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
+    transition: all 0.2s;
+}
+
+.btn-primary:hover {
+    background: #ea580c;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(249, 115, 22, 0.3);
+}
+
+.btn-primary:active {
+    background: #ea580c !important;
+    transform: translateY(0);
+}
+
+/* Password validation hint (optional) */
+input:invalid:focus {
+    border-color: #ef4444;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+
+    .container {
+        padding: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    .row.mb-3 label {
+        padding-top: 0;
+        margin-bottom: 0.5rem;
+    }
+
+    .offset-sm-4 {
+        margin-left: 0;
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
+}
+
+/* Error messages (if you have them) */
+.errorlist {
+    list-style: none;
+    color: #ef4444;
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+    padding-left: 0;
+}
+
+/* Success messages */
+.messages {
+    margin-bottom: 1.5rem;
+}
+
+.alert-success {
+    background: #f0fdf4;
+    border: 1px solid #86efac;
+    color: #166534;
+    padding: 1rem;
+    border-radius: 10px;
+    font-size: 0.95rem;
+}

@@ -1,6 +1,8 @@
+import smtplib
 from datetime import datetime
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User,Group
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
@@ -39,14 +41,39 @@ def logout_get(request):
     return redirect("/myapp/loginindex_get/")
 
 
-def forgot_get(request):
+def forgotpassword_get(request):
     return render(request,'forgotpassword.html')
 
+def forgotpassword_post(request):
 
-def forgot_post(request):
-    return render(request,'forgotpassword.html')
+
+    email=request.POST['email']
+
+    if User.objects.filter(username=email).exists():
+
+        import random
+        new_pass = random.randint(00000, 99999)
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login("leagaladvisorteam@gmail.com", " eugnxtyylwtqwlav")  # App Password
+        to = email
+        subject = "Test Email"
+        body = "Your new password is " + str(new_pass)
+        msg = f"Subject: {subject}\n\n{body}"
+        server.sendmail("s@gmail.com", to, msg)  # Disconnect from the server
+        server.quit()
+
+        user = User.objects.get(username=email)
+        user.set_password(str(new_pass))
+        user.save()
+
+        return redirect('/myapp/loginindex_get/')
+    else:
+        messages.warning(request, 'email not  exists')
+        return redirect('/myapp/forgotpassword_get/')
 
 # A D M I N--------------------------------
+@login_required(login_url="/myapp/loginindex_get/")
 def admin_home(request):
     return render(request,'admins/adminhomeindex.html')
 
@@ -54,23 +81,25 @@ def viewcomplaint_get(request):
     data=Complaint.objects.all()
 
     return render(request,'admins/viewcomplaint.html',{'c':data})
-
+@login_required(login_url="/myapp/loginindex_get/")
 def viewlogs_get(request):
     data=Log.objects.all()
     return render(request,'admins/viewlogs.html',{'logs':data})
-
+@login_required(login_url="/myapp/loginindex_get/")
 def viewusers_get(request):
     data=Users.objects.all()
     return render(request,'admins/viewuser.html',{'Users': data})
+@login_required(login_url="/myapp/loginindex_get/")
 def viewblockedusers_get(request):
     data=Users.objects.filter(status="Blocked")
     return render(request,'admins/blockusers.html',{'Users': data})
+@login_required(login_url="/myapp/loginindex_get/")
 def blockuser_get(request,id):
     Users.objects.filter(id=id).update(status="Blocked")
     return redirect('/myapp/viewblockedusers_get/')
 
 
-
+@login_required(login_url="/myapp/loginindex_get/")
 def changepassword_get(request):
     return render(request,'admins/changepassword.html')
 
@@ -91,7 +120,7 @@ def changepassword_post(request):
 
     return redirect('/myapp/loginindex_get/')
 
-
+@login_required(login_url="/myapp/loginindex_get/")
 def sentreply_get(request,id):
     return render(request,'admins/sentreply.html',{'id':id})
 
@@ -147,7 +176,7 @@ def register_post(request):
 
 
     return redirect('/myapp/loginindex_get/')
-
+@login_required(login_url="/myapp/loginindex_get/")
 def sentcomplaint_get(request):
     return render(request,'Users/sentcomplaint.html')
 
@@ -162,12 +191,13 @@ def sentcomplaint_post(request):
     c.USER=Users.objects.get(AUTH_USER=request.user)
     c.save()
     return redirect("/myapp/viewreply_get/")
-
+@login_required(login_url="/myapp/loginindex_get/")
 def viewprofile_get(request):
     data=Users.objects.get(AUTH_USER=request.user)
 
 
     return render(request,'Users/viewprofile.html',{'data': data})
+@login_required(login_url="/myapp/loginindex_get/")
 def user_changepassword_get(request):
     return render(request,'Users/changepassword.html')
 
@@ -187,6 +217,7 @@ def user_changepassword_post(request):
     user.save()
 
     return redirect('/myapp/loginindex_get/')
+@login_required(login_url="/myapp/loginindex_get/")
 def editprofile_get(request):
     u = Users.objects.get(AUTH_USER_id=request.user.id)
 
@@ -225,15 +256,16 @@ def editprofile_post(request):
     u.save()
 
     return redirect("/myapp/viewprofile_get/")
+@login_required(login_url="/myapp/loginindex_get/")
 def viewreply_get(request):
     data = Complaint.objects.filter(USER__AUTH_USER=request.user)
 
     return render(request, 'Users/viewreply.html', {'c': data})
 
-
+@login_required(login_url="/myapp/loginindex_get/")
 def userhome_get(request):
     return render(request,'Users/userhome.html')
-
+@login_required(login_url="/myapp/loginindex_get/")
 def loadsolar_get(request):
     import pandas
     p="C:\\Users\\HK Technology\\PycharmProjects\\solar_and_wind_energy_prediction\\myapp\\Dataset\\Solar\\Weather_Data_reordered_all3.csv"
@@ -242,6 +274,7 @@ def loadsolar_get(request):
 
 
     return render(request,'Users/loadsolar.html',{'c':data.values})
+@login_required(login_url="/myapp/loginindex_get/")
 def loadwind_get(request):
     import pandas
     p="C:\\Users\\HK Technology\\PycharmProjects\\solar_and_wind_energy_prediction\\myapp\\Dataset\\Wind\\Location1.csv"
@@ -249,7 +282,7 @@ def loadwind_get(request):
     data=pandas.read_csv(p)
     print(data.values)
     return render(request,'Users/loadwind.html',{'c':data.values})
-
+@login_required(login_url="/myapp/loginindex_get/")
 def solarinput_get(request):
     return render(request, 'Users/solarinput.html')
 
@@ -402,7 +435,7 @@ def solarinput_post(request):
             return JsonResponse({"error": str(e)}, status=500)
 
     return JsonResponse({"error": "Invalid request"}, status=400)
-
+@login_required(login_url="/myapp/loginindex_get/")
 def windinput_get(request):
     return render(request,'Users/windinput.html')
 import json

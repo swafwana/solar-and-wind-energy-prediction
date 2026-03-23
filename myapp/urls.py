@@ -26,8 +26,8 @@ urlpatterns = [
 
     path('loginindex_get/', views.loginindex_get),
     path('loginindex_post/',views.loginindex_post),
-    path('forgot_get/',views.forgot_get),
-    path('forgot_post/',views.forgot_post),
+    path('forgotpassword_get/',views.forgotpassword_get),
+    path('forgotpassword_post/',views.forgotpassword_post),
     path('logout_get/',views.logout_get),
 
     #ADMIN
