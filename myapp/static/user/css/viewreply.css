@@ -1,0 +1,62 @@
+body {
+    background: #FFF7ED;
+}
+
+.navbar {
+    background: #1C1F2E !important;
+}
+
+.navbar-brand h1 {
+    color: #F68A0A !important;
+    font-size: 1.5rem;
+}
+
+.page-header {
+    background: linear-gradient(135deg, #F68A0A 0%, #F97316 100%);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.page-header i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.page-header h1 {
+    font-size: 2rem;
+    color: white;
+}
+
+.card-table {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.form-control:focus {
+    border-color: #F68A0A;
+    box-shadow: 0 0 0 3px rgba(246, 138, 10, 0.1);
+}
+
+.table thead th {
+    background: #F68A0A;
+    color: white;
+}
+
+.btn-back {
+    background: transparent;
+    border: 2px solid #F68A0A;
+    padding: 8px 20px;
+    border-radius: 50px;
+    color: #F68A0A;
+    text-decoration: none;
+}
+
+.btn-back:hover {
+    background: #F68A0A;
+    color: white;
+}

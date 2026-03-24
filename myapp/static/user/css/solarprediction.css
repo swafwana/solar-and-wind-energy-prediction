@@ -1,0 +1,125 @@
+/* Solar Prediction Page - Matching Dashboard Style */
+.solar-header {
+    background: linear-gradient(135deg, #F68A0A 0%, #F97316 100%);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    color: white;
+    margin-bottom: 2rem;
+    box-shadow: 0 5px 15px rgba(246, 138, 10, 0.2);
+}
+
+.solar-header i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.solar-header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.solar-header p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0;
+}
+
+.prediction-form-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.prediction-form-card .form-label {
+    font-weight: 600;
+    color: #1C1917;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.prediction-form-card .form-label i {
+    margin-right: 8px;
+    color: #F68A0A;
+}
+
+.prediction-form-card .form-control {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px 12px;
+    transition: all 0.3s ease;
+}
+
+.prediction-form-card .form-control:focus {
+    border-color: #F68A0A;
+    box-shadow: 0 0 0 3px rgba(246, 138, 10, 0.1);
+}
+
+.btn-predict-solar {
+    background: linear-gradient(135deg, #F68A0A 0%, #F97316 100%);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: white;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.btn-predict-solar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(246, 138, 10, 0.4);
+    color: white;
+}
+
+.result-card-solar {
+    background: linear-gradient(135deg, #F68A0A 0%, #F97316 100%);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    text-align: center;
+    color: white;
+    display: none;
+}
+
+.result-card-solar.show {
+    display: block;
+    animation: slideIn 0.4s ease-out;
+}
+
+.result-card-solar i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.result-card-solar h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .solar-header {
+        padding: 1.5rem;
+    }
+
+    .solar-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .prediction-form-card {
+        padding: 1.5rem;
+    }
+}

@@ -1,0 +1,122 @@
+body {
+    background: #FFF7ED;
+}
+
+.navbar {
+    background: #1C1F2E !important;
+    padding: 15px 0;
+}
+
+.navbar-brand h1 {
+    color: #F68A0A !important;
+    font-size: 1.5rem;
+    margin-bottom: 0;
+}
+
+.complaint-header {
+    background: linear-gradient(135deg, #F68A0A 0%, #F97316 100%);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    color: white;
+    margin-bottom: 2rem;
+    box-shadow: 0 5px 15px rgba(246, 138, 10, 0.2);
+}
+
+.complaint-header i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.complaint-header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.complaint-header p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0;
+}
+
+.complaint-form-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.complaint-form-card .form-label {
+    font-weight: 600;
+    color: #1C1917;
+    margin-bottom: 0.5rem;
+}
+
+.complaint-form-card .form-label i {
+    margin-right: 8px;
+    color: #F68A0A;
+}
+
+.complaint-form-card .form-control {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 12px 15px;
+}
+
+.complaint-form-card .form-control:focus {
+    border-color: #F68A0A;
+    box-shadow: 0 0 0 3px rgba(246, 138, 10, 0.1);
+}
+
+.complaint-form-card textarea.form-control {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, #F68A0A 0%, #F97316 100%);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: white;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(246, 138, 10, 0.4);
+    color: white;
+}
+
+.btn-back {
+    background: transparent;
+    border: 2px solid #F68A0A;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: #F68A0A;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+    background: #F68A0A;
+    color: white;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .complaint-header {
+        padding: 1.5rem;
+    }
+
+    .complaint-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .complaint-form-card {
+        padding: 1.5rem;
+    }
+}

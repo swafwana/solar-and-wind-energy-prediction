@@ -54,6 +54,7 @@ urlpatterns = [
     path('user_changepassword_post/',views.user_changepassword_post),
     path('viewreply_get/',views.viewreply_get),
     path('userhome_get/',views.userhome_get),
+    path('view-all-predictions/', views.view_all_predictions, name='view_all_predictions'),
     path('loadsolar_get/',views.loadsolar_get),
     path('loadwind_get/',views.loadwind_get),
     path('solarinput_get/',views.solarinput_get),

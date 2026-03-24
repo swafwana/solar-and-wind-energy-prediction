@@ -264,7 +264,64 @@ def viewreply_get(request):
 
 @login_required(login_url="/myapp/loginindex_get/")
 def userhome_get(request):
-    return render(request,'Users/userhome.html')
+    # Quick debug - add this temporarily
+    print(f"Logged in user: {request.user.username}")
+    print(f"Is staff: {request.user.is_staff}")
+
+    # Check how many logs exist for this user
+    user_logs = Log.objects.filter(USER__AUTH_USER=request.user)
+    print(f"Logs for this user: {user_logs.count()}")
+
+    # Check total logs in database
+    total_logs = Log.objects.all().count()
+    print(f"Total logs in DB: {total_logs}")
+
+    # If counts don't match, you're seeing other users' data
+    if user_logs.count() != total_logs:
+        print("WARNING: There are logs from other users!")
+
+
+    # Get total predictions count for the user
+    total_predictions = Log.objects.filter(USER__AUTH_USER=request.user).count()
+
+    # Get recent predictions (last 5)
+    recent_predictions = Log.objects.filter(
+        USER__AUTH_USER=request.user
+    ).order_by('-date', '-time')[:5]
+
+    # Get solar vs wind counts
+    solar_count = Log.objects.filter(
+        USER__AUTH_USER=request.user,
+        prediction_type="solar"
+    ).count()
+
+    wind_count = Log.objects.filter(
+        USER__AUTH_USER=request.user,
+        prediction_type="wind"
+    ).count()
+
+    context = {
+        'total_predictions': total_predictions,
+        'recent_predictions': recent_predictions,
+        'solar_count': solar_count,
+        'wind_count': wind_count,
+    }
+    return render(request, 'Users/userhome.html', context)
+
+
+@login_required(login_url="/myapp/loginindex_get/")
+def view_all_predictions(request):
+    """Simple view for users to see all their predictions"""
+    # Get all predictions for logged in user
+    all_predictions = Log.objects.filter(
+        USER__AUTH_USER=request.user
+    ).order_by('-date', '-time')
+
+    context = {
+        'predictions': all_predictions,
+        'total': all_predictions.count(),
+    }
+    return render(request, 'Users/all_predictions.html', context)
 @login_required(login_url="/myapp/loginindex_get/")
 def loadsolar_get(request):
     import pandas
