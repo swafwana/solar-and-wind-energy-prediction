@@ -6,27 +6,387 @@
 {#  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">#}
 {#</head>#}
 {#<body>#}
-{% extends 'admins/adminhomeindex.html' %}
-{% block body %}
-  <div class="container mt-5">
-    <h4 class="mb-4">Send a Reply</h4>
-    <form method="post" action="/myapp/sentreply_post/">
-      {% csrf_token %}
-<input type="hidden" name="id" value="{{ id }}">
-      <!-- Complaint Text -->
-      <div class="mb-3">
-        <label for="reply" class="form-label">Reply</label>
-        <textarea class="form-control" id="reply" name="reply" rows="4" placeholder="Write your reply here..." required></textarea>
-      </div>
-
-
-
-      <!-- Submit Button -->
-      <button type="submit" class="btn btn-primary">Send Reply</button>
-    </form>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+{#{% extends 'admins/adminhomeindex.html' %}#}
+{#{% block body %}#}
+{#  <div class="container mt-5">#}
+{#    <h4 class="mb-4">Send a Reply</h4>#}
+{#    <form method="post" action="/myapp/sentreply_post/">#}
+{#      {% csrf_token %}#}
+{#<input type="hidden" name="id" value="{{ id }}">#}
+{#      <!-- Complaint Text -->#}
+{#      <div class="mb-3">#}
+{#        <label for="reply" class="form-label">Reply</label>#}
+{#        <textarea class="form-control" id="reply" name="reply" rows="4" placeholder="Write your reply here..." required></textarea>#}
+{#      </div>#}
+{##}
+{##}
+{##}
+{#      <!-- Submit Button -->#}
+{#      <button type="submit" class="btn btn-primary">Send Reply</button>#}
+{#    </form>#}
+{#  </div>#}
+{##}
+{#  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>#}
 {#</body>#}
 {#</html>#}
+{#{% endblock %}#}
+{% extends 'admins/adminhomeindex.html' %}
+{% block body %}
+<style>
+/* ============================================ */
+/* SEND REPLY PAGE - MINIMAL ORANGE THEME      */
+/* ENLARGED LAYOUT                             */
+/* ============================================ */
+
+:root {
+    --orange-primary: #f68a0a;
+    --orange-light: #ffb347;
+    --orange-soft: #fff5e8;
+    --orange-dark: #e07a00;
+    --gray-dark: #2d3e50;
+    --gray-medium: #6c7a89;
+    --gray-light: #f8f9fc;
+    --border-light: #e9ecef;
+    --white: #ffffff;
+    --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.08);
+    --transition: all 0.25s ease;
+}
+
+/* Container Styling - Full width with comfortable spacing */
+.reply-container {
+    min-height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: var(--gray-light);
+}
+
+/* Reply Card - Larger and more spacious */
+.reply-card {
+    background: var(--white);
+    border-radius: 24px;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    border: 1px solid var(--border-light);
+    transition: var(--transition);
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.reply-card:hover {
+    box-shadow: 0 8px 24px rgba(246, 138, 10, 0.12);
+}
+
+/* Header with Orange Accent */
+.reply-header {
+    padding: 2rem 2.5rem;
+    border-bottom: 3px solid var(--orange-primary);
+    background: var(--white);
+}
+
+.reply-header h4 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--gray-dark);
+    margin: 0;
+    letter-spacing: -0.3px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.reply-header h4 i {
+    color: var(--orange-primary);
+    font-size: 1.8rem;
+}
+
+.reply-header p {
+    color: var(--gray-medium);
+    margin-top: 0.75rem;
+    margin-bottom: 0;
+    font-size: 0.95rem;
+}
+
+/* Form Body - More spacious */
+.reply-body {
+    padding: 2.5rem;
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-group label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--gray-dark);
+    margin-bottom: 0.75rem;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-group label i {
+    color: var(--orange-primary);
+    margin-right: 10px;
+    font-size: 1rem;
+}
+
+/* Large Textarea Styling */
+.form-control {
+    border: 1.5px solid var(--border-light);
+    border-radius: 16px;
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    transition: var(--transition);
+    background: var(--white);
+    color: var(--gray-dark);
+    width: 100%;
+    resize: vertical;
+    font-family: inherit;
+    line-height: 1.6;
+}
+
+.form-control:focus {
+    border-color: var(--orange-primary);
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(246, 138, 10, 0.12);
+}
+
+.form-control::placeholder {
+    color: #cbd5e0;
+    font-size: 0.95rem;
+}
+
+/* Make textarea larger */
+textarea.form-control {
+    min-height: 220px;
+    max-height: 400px;
+}
+
+/* Submit Button - Larger */
+.btn-send-reply {
+    background: var(--orange-primary);
+    color: var(--white);
+    border: none;
+    padding: 0.9rem 2rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: var(--transition);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-send-reply:hover {
+    background: var(--orange-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(246, 138, 10, 0.3);
+}
+
+.btn-send-reply:active {
+    transform: translateY(0);
+}
+
+.btn-send-reply i {
+    font-size: 1.1rem;
+}
+
+/* Character Counter - More prominent */
+.char-counter {
+    font-size: 0.85rem;
+    color: var(--gray-medium);
+    text-align: right;
+    margin-top: 0.75rem;
+    padding-right: 0.25rem;
+}
+
+.char-counter span {
+    color: var(--orange-primary);
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+/* Optional: Reply Info Box */
+.reply-info {
+    background: var(--orange-soft);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--orange-primary);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.reply-info i {
+    color: var(--orange-primary);
+    font-size: 1.2rem;
+}
+
+.reply-info span {
+    color: var(--gray-dark);
+    font-size: 0.9rem;
+}
+
+.reply-info strong {
+    color: var(--orange-primary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .reply-container {
+        padding: 1rem;
+    }
+
+    .reply-card {
+        max-width: 100%;
+    }
+
+    .reply-header {
+        padding: 1.5rem;
+    }
+
+    .reply-header h4 {
+        font-size: 1.4rem;
+    }
+
+    .reply-header h4 i {
+        font-size: 1.4rem;
+    }
+
+    .reply-body {
+        padding: 1.5rem;
+    }
+
+    .form-group label {
+        font-size: 0.85rem;
+    }
+
+    .form-control {
+        padding: 0.8rem 1rem;
+        font-size: 0.95rem;
+    }
+
+    textarea.form-control {
+        min-height: 180px;
+    }
+
+    .btn-send-reply {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.95rem;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .reply-info {
+        padding: 0.8rem 1rem;
+    }
+
+    .reply-info span {
+        font-size: 0.85rem;
+    }
+}
+
+/* Animation for button */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.98);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.btn-send-reply:active {
+    animation: pulse 0.2s ease;
+}
+
+/* Focus visible for accessibility */
+.form-control:focus-visible,
+.btn-send-reply:focus-visible {
+    outline: 2px solid var(--orange-primary);
+    outline-offset: 2px;
+}
+</style>
+
+<div class="reply-container">
+    <div class="reply-card">
+        <div class="reply-header">
+            <h4>
+                <i class="fas fa-reply-all"></i> Send a Reply
+            </h4>
+            <p>Respond to user feedback with a detailed message</p>
+        </div>
+
+        <div class="reply-body">
+            <!-- Optional Info Box -->
+{#            <div class="reply-info">#}
+{#                <i class="fas fa-info-circle"></i>#}
+{#                <span>Replying to <strong>complaint/feedback #{{ id }}</strong> — Your response will be sent to the user immediately</span>#}
+{#            </div>#}
+
+            <form method="post" action="/myapp/sentreply_post/" id="replyForm">
+                {% csrf_token %}
+                <input type="hidden" name="id" value="{{ id }}">
+
+                <div class="form-group">
+                    <label for="reply">
+                        <i class="fas fa-comment-dots"></i> Your Reply
+                    </label>
+                    <textarea class="form-control" id="reply" name="reply" rows="8"
+                              placeholder="Write your detailed reply here... Be clear and helpful in your response."
+                              required></textarea>
+                    <div class="char-counter">
+                        <span id="charCount">0</span> characters
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-send-reply">
+                    <i class="fas fa-paper-plane"></i> Send Reply
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<!-- Character Counter Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const textarea = document.getElementById('reply');
+    const charCountSpan = document.getElementById('charCount');
+
+    if (textarea && charCountSpan) {
+        // Update character count on input
+        textarea.addEventListener('input', function() {
+            const count = this.value.length;
+            charCountSpan.textContent = count;
+
+            // Optional: Add visual feedback based on length
+            if (count > 500) {
+                charCountSpan.style.color = '#dc3545';
+            } else if (count > 300) {
+                charCountSpan.style.color = '#f68a0a';
+            } else {
+                charCountSpan.style.color = '#f68a0a';
+            }
+        });
+
+        // Initial count
+        charCountSpan.textContent = textarea.value.length;
+    }
+});
+</script>
+
 {% endblock %}

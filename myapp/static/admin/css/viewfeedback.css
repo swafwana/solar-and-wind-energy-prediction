@@ -1,0 +1,393 @@
+/* ============================================ */
+/* VIEW COMPLAINTS PAGE - MINIMAL ORANGE THEME  */
+/* ============================================ */
+
+:root {
+    --orange-primary: #f68a0a;
+    --orange-light: #ffb347;
+    --orange-soft: #fff5e8;
+    --orange-dark: #e07a00;
+    --gray-dark: #2d3e50;
+    --gray-medium: #6c7a89;
+    --gray-light: #f8f9fc;
+    --border-light: #e9ecef;
+    --white: #ffffff;
+    --danger: #dc3545;
+    --success: #28a745;
+    --warning: #ffc107;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-hover: 0 4px 12px rgba(246, 138, 10, 0.08);
+    --transition: all 0.25s ease;
+}
+
+/* ----- Page Container ----- */
+.complaints-container {
+    padding: 1.5rem 2rem;
+    background: var(--gray-light);
+    min-height: 100vh;
+}
+
+/* ----- Page Header (Orange Accent) ----- */
+.complaints-header {
+    margin-bottom: 2rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 3px solid var(--orange-primary);
+    display: inline-block;
+}
+
+.complaints-header h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--gray-dark);
+    margin: 0;
+    letter-spacing: -0.3px;
+}
+
+.complaints-header h3 i {
+    color: var(--orange-primary);
+    margin-right: 10px;
+    font-size: 1.6rem;
+}
+
+.header-subtitle {
+    color: var(--gray-medium);
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* ----- Date Filter Card Section ----- */
+.filter-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.filter-card:hover {
+    box-shadow: var(--shadow-hover);
+}
+
+.filter-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--gray-dark);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.filter-title i {
+    color: var(--orange-primary);
+    margin-right: 8px;
+}
+
+.filter-card .form-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--gray-medium);
+    margin-bottom: 0.5rem;
+}
+
+.filter-card .form-control {
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    background: var(--white);
+}
+
+.filter-card .form-control:focus {
+    border-color: var(--orange-primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(246, 138, 10, 0.15);
+}
+
+/* ----- Table Card / Wrapper ----- */
+.table-card {
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    border: 1px solid var(--border-light);
+    transition: var(--transition);
+}
+
+.table-card:hover {
+    box-shadow: var(--shadow-hover);
+}
+
+/* DataTable Customization */
+.dataTables_wrapper .dataTables_length select,
+.dataTables_wrapper .dataTables_filter input {
+    border: 1px solid var(--border-light);
+    border-radius: 30px;
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+    transition: var(--transition);
+}
+
+.dataTables_wrapper .dataTables_filter input:focus {
+    border-color: var(--orange-primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(246, 138, 10, 0.15);
+}
+
+.dataTables_wrapper .dataTables_length select:focus {
+    border-color: var(--orange-primary);
+    outline: none;
+}
+
+/* Table Header - Orange Theme */
+table.dataTable thead th {
+    background-color: var(--orange-soft);
+    color: var(--orange-dark);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    border-bottom: 2px solid var(--orange-primary);
+    padding: 1rem 0.75rem;
+}
+
+table.dataTable thead th:first-child {
+    border-top-left-radius: 12px;
+}
+
+table.dataTable thead th:last-child {
+    border-top-right-radius: 12px;
+}
+
+/* Table Rows */
+table.dataTable tbody tr {
+    transition: var(--transition);
+    border-bottom: 1px solid var(--border-light);
+}
+
+table.dataTable tbody tr:hover {
+    background-color: var(--orange-soft);
+    cursor: default;
+}
+
+table.dataTable tbody td {
+    padding: 0.9rem 0.75rem;
+    vertical-align: middle;
+    font-size: 0.9rem;
+    color: var(--gray-dark);
+}
+
+/* Status Badge Styling */
+.status-badge {
+    display: inline-block;
+    padding: 0.3rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 30px;
+    text-align: center;
+    min-width: 85px;
+}
+
+.status-pending {
+    background: #fff3e0;
+    color: var(--orange-primary);
+    border: 1px solid var(--orange-light);
+}
+
+.status-resolved {
+    background: #e8f5e9;
+    color: var(--success);
+    border: 1px solid #a5d6a7;
+}
+
+.status-inprogress {
+    background: #fff8e1;
+    color: var(--warning);
+    border: 1px solid #ffe082;
+}
+
+/* Reply Button - Orange Theme */
+.btn-reply {
+    background: var(--orange-primary);
+    color: white;
+    border: none;
+    padding: 0.4rem 1.2rem;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: var(--transition);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-reply:hover {
+    background: var(--orange-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(246, 138, 10, 0.3);
+    color: white;
+}
+
+.btn-reply i {
+    margin-right: 5px;
+    font-size: 0.75rem;
+}
+
+/* Reply Text Display */
+.reply-text {
+    background: var(--orange-soft);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--orange-dark);
+    display: inline-block;
+    max-width: 200px;
+    word-wrap: break-word;
+}
+
+/* DataTables Pagination - Orange Theme */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    border-radius: 30px !important;
+    margin: 0 3px;
+    padding: 0.35rem 0.85rem;
+    font-size: 0.85rem;
+    border: 1px solid var(--border-light);
+    color: var(--gray-dark);
+    background: var(--white);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: var(--orange-primary) !important;
+    border-color: var(--orange-primary) !important;
+    color: white !important;
+    box-shadow: 0 2px 6px rgba(246, 138, 10, 0.3);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: var(--orange-soft) !important;
+    border-color: var(--orange-light) !important;
+    color: var(--orange-primary) !important;
+}
+
+/* DataTables Info & Length */
+.dataTables_info {
+    font-size: 0.85rem;
+    color: var(--gray-medium);
+    padding-top: 1rem;
+}
+
+/* Empty State Styling */
+.dataTables_empty {
+    color: var(--orange-primary);
+    font-weight: 500;
+    text-align: center;
+    padding: 2rem !important;
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+    .complaints-container {
+        padding: 1rem;
+    }
+
+    .complaints-header h3 {
+        font-size: 1.5rem;
+    }
+
+    .filter-card {
+        padding: 1rem;
+    }
+
+    .filter-card .col-md-4 {
+        margin-bottom: 1rem;
+    }
+
+    table.dataTable thead th,
+    table.dataTable tbody td {
+        padding: 0.6rem 0.5rem;
+        font-size: 0.8rem;
+    }
+
+    .btn-reply {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.75rem;
+    }
+
+    .reply-text {
+        font-size: 0.75rem;
+        max-width: 150px;
+    }
+}
+
+/* Zebra striping with subtle orange touch */
+table.dataTable.stripe tbody tr.odd {
+    background-color: #fefcf9;
+}
+
+table.dataTable.stripe tbody tr.even {
+    background-color: var(--white);
+}
+
+/* Scrollbar (optional) */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--gray-light);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--orange-light);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--orange-primary);
+}
+
+/* Date filter icons styling */
+.filter-card .input-group-text {
+    background: var(--orange-soft);
+    border: 1px solid var(--border-light);
+    color: var(--orange-primary);
+    border-radius: 12px 0 0 12px;
+}
+
+/* Action column alignment */
+.text-center-action {
+    text-align: center;
+}
+
+/* Responsive table wrapper */
+.table-responsive-wrapper {
+    overflow-x: auto;
+    border-radius: 16px;
+}
+
+/* Clear filter button (optional) */
+.btn-clear-filters {
+    background: transparent;
+    border: 1px solid var(--border-light);
+    color: var(--gray-medium);
+    padding: 0.4rem 1rem;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    transition: var(--transition);
+    margin-top: 1.8rem;
+}
+
+.btn-clear-filters:hover {
+    border-color: var(--orange-primary);
+    color: var(--orange-primary);
+    background: var(--orange-soft);
+}
+
+/* Feedback text truncation for long messages */
+.feedback-text {
+    max-width: 250px;
+    word-wrap: break-word;
+    line-height: 1.4;
+}

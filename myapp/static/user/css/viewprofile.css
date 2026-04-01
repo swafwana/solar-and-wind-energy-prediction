@@ -1,0 +1,282 @@
+/* ============================================ */
+/* VIEW PROFILE PAGE - MINIMAL ORANGE THEME    */
+/* Matching Dashboard Solar Prediction Style   */
+/* ============================================ */
+
+:root {
+    --orange-primary: #F68A0A;
+    --orange-gradient-start: #F68A0A;
+    --orange-gradient-end: #F97316;
+    --gray-dark: #1C1917;
+    --gray-medium: #6B7280;
+    --gray-light: #F9FAFB;
+    --border-light: #E5E7EB;
+    --white: #FFFFFF;
+    --shadow-sm: 0 5px 15px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 5px 20px rgba(0, 0, 0, 0.08);
+    --transition: all 0.3s ease;
+}
+
+/* Base Body Styling */
+body {
+    background: var(--gray-light);
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+    padding: 2rem 0;
+    margin: 0;
+}
+
+/* Main Container */
+.profile-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Header - Matching Solar Prediction Style */
+.profile-header {
+    background: linear-gradient(135deg, var(--orange-gradient-start) 0%, var(--orange-gradient-end) 100%);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    color: var(--white);
+    margin-bottom: 2rem;
+    box-shadow: 0 5px 15px rgba(246, 138, 10, 0.2);
+}
+
+.profile-header i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.profile-header h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--white);
+    font-weight: 600;
+}
+
+.profile-header p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0;
+    font-size: 0.95rem;
+}
+
+/* Profile Card */
+.profile-card {
+    background: var(--white);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+}
+
+.profile-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* Profile Row Styling */
+.profile-row {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-light);
+    display: flex;
+    align-items: flex-start;
+}
+
+.profile-row:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* Label Styling */
+.profile-label {
+    font-weight: 600;
+    color: var(--gray-dark);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.profile-label i {
+    color: var(--orange-primary);
+    margin-right: 10px;
+    width: 20px;
+}
+
+/* Value Styling */
+.profile-value {
+    color: var(--gray-dark);
+    font-size: 1rem;
+    font-weight: 500;
+    word-break: break-word;
+}
+
+/* Photo Styling */
+.profile-photo {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 3px solid var(--orange-primary);
+    background: var(--white);
+    transition: var(--transition);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-photo:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 20px rgba(246, 138, 10, 0.2);
+}
+
+/* Gender Badge Styling */
+.gender-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: #FFF5E8;
+    color: var(--orange-primary);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.gender-badge i {
+    margin-right: 5px;
+    font-size: 0.8rem;
+}
+
+/* Edit Button - Matching Predict Button Style */
+.btn-edit-profile {
+    background: linear-gradient(135deg, var(--orange-gradient-start) 0%, var(--orange-gradient-end) 100%);
+    border: none;
+    padding: 12px 35px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: var(--white);
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.btn-edit-profile:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(246, 138, 10, 0.4);
+    color: var(--white);
+}
+
+.btn-edit-profile i {
+    font-size: 1rem;
+}
+
+/* Animation for page load */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.profile-container {
+    animation: fadeInUp 0.4s ease-out;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--gray-light);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--orange-primary);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--orange-gradient-end);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem 0;
+    }
+
+    .profile-header {
+        padding: 1.5rem;
+    }
+
+    .profile-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .profile-header i {
+        font-size: 2.5rem;
+    }
+
+    .profile-card {
+        padding: 1.5rem;
+    }
+
+    .profile-row {
+        flex-direction: column;
+        margin-bottom: 1.25rem;
+        padding-bottom: 1rem;
+    }
+
+    .profile-label {
+        margin-bottom: 0.5rem;
+        font-size: 0.85rem;
+    }
+
+    .profile-value {
+        font-size: 0.95rem;
+    }
+
+    .profile-photo {
+        width: 100px;
+        height: 100px;
+    }
+
+    .btn-edit-profile {
+        padding: 10px 25px;
+        font-size: 0.9rem;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .offset-sm-4 {
+        margin-left: 0;
+    }
+}
+
+/* Print Styles (optional) */
+@media print {
+    .btn-edit-profile {
+        display: none;
+    }
+
+    .profile-header {
+        background: var(--gray-light);
+        color: var(--gray-dark);
+        box-shadow: none;
+    }
+
+    .profile-header h2 {
+        color: var(--gray-dark);
+    }
+
+    .profile-card {
+        box-shadow: none;
+        padding: 0;
+    }
+}

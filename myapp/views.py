@@ -265,20 +265,20 @@ def viewreply_get(request):
 @login_required(login_url="/myapp/loginindex_get/")
 def userhome_get(request):
     # Quick debug - add this temporarily
-    print(f"Logged in user: {request.user.username}")
-    print(f"Is staff: {request.user.is_staff}")
-
-    # Check how many logs exist for this user
-    user_logs = Log.objects.filter(USER__AUTH_USER=request.user)
-    print(f"Logs for this user: {user_logs.count()}")
-
-    # Check total logs in database
-    total_logs = Log.objects.all().count()
-    print(f"Total logs in DB: {total_logs}")
-
-    # If counts don't match, you're seeing other users' data
-    if user_logs.count() != total_logs:
-        print("WARNING: There are logs from other users!")
+    # print(f"Logged in user: {request.user.username}")
+    # print(f"Is staff: {request.user.is_staff}")
+    #
+    # # Check how many logs exist for this user
+    # user_logs = Log.objects.filter(USER__AUTH_USER=request.user)
+    # print(f"Logs for this user: {user_logs.count()}")
+    #
+    # # Check total logs in database
+    # total_logs = Log.objects.all().count()
+    # print(f"Total logs in DB: {total_logs}")
+    #
+    # # If counts don't match, you're seeing other users' data
+    # if user_logs.count() != total_logs:
+    #     print("WARNING: There are logs from other users!")
 
 
     # Get total predictions count for the user

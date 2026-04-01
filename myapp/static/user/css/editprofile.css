@@ -1,0 +1,423 @@
+/* ============================================ */
+/* EDIT PROFILE PAGE - MINIMAL ORANGE THEME    */
+/* Matching Dashboard Style                    */
+/* ============================================ */
+
+:root {
+    --orange-primary: #F68A0A;
+    --orange-gradient-start: #F68A0A;
+    --orange-gradient-end: #F97316;
+    --gray-dark: #1C1917;
+    --gray-medium: #6B7280;
+    --gray-light: #F9FAFB;
+    --border-light: #E5E7EB;
+    --white: #FFFFFF;
+    --danger: #DC2626;
+    --success: #10B981;
+    --shadow-sm: 0 5px 15px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 5px 20px rgba(0, 0, 0, 0.08);
+    --transition: all 0.3s ease;
+}
+
+/* Base Body Styling */
+body {
+    background: var(--gray-light);
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+    padding: 2rem 0;
+    margin: 0;
+}
+
+/* Main Container */
+.edit-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Header - Matching Solar Prediction Style */
+.edit-header {
+    background: linear-gradient(135deg, var(--orange-gradient-start) 0%, var(--orange-gradient-end) 100%);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    color: var(--white);
+    margin-bottom: 2rem;
+    box-shadow: 0 5px 15px rgba(246, 138, 10, 0.2);
+}
+
+.edit-header i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.edit-header h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--white);
+    font-weight: 600;
+}
+
+.edit-header p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0;
+    font-size: 0.95rem;
+}
+
+/* Edit Card */
+.edit-card {
+    background: var(--white);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+}
+
+.edit-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* Form Row Styling */
+.form-row {
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    display: flex;
+    align-items: flex-start;
+}
+
+.form-row:last-of-type {
+    margin-bottom: 0;
+}
+
+/* Label Styling */
+.form-label-custom {
+    font-weight: 600;
+    color: var(--gray-dark);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-label-custom i {
+    color: var(--orange-primary);
+    margin-right: 10px;
+    width: 20px;
+}
+
+/* Input Field Styling */
+.form-control-custom {
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    background: var(--white);
+    color: var(--gray-dark);
+    width: 100%;
+}
+
+.form-control-custom:focus {
+    border-color: var(--orange-primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(246, 138, 10, 0.1);
+}
+
+/* Radio Button Styling */
+.radio-group {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.form-check-custom {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.form-check-custom input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--orange-primary);
+}
+
+.form-check-custom label {
+    color: var(--gray-dark);
+    font-size: 0.95rem;
+    cursor: pointer;
+    margin: 0;
+}
+
+/* File Input Styling */
+.file-input-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.file-input-wrapper input[type="file"] {
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    width: 100%;
+    cursor: pointer;
+}
+
+.file-input-wrapper input[type="file"]::-webkit-file-upload-button {
+    background: var(--orange-primary);
+    color: var(--white);
+    border: none;
+    padding: 6px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 12px;
+    transition: var(--transition);
+}
+
+.file-input-wrapper input[type="file"]::-webkit-file-upload-button:hover {
+    background: var(--orange-gradient-end);
+}
+
+/* Current Photo Display */
+.current-photo {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: var(--gray-light);
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.current-photo img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid var(--orange-primary);
+}
+
+.current-photo p {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+    font-size: 0.8rem;
+    color: var(--gray-medium);
+    text-align: center;
+}
+
+/* Submit Button */
+.btn-submit {
+    background: linear-gradient(135deg, var(--orange-gradient-start) 0%, var(--orange-gradient-end) 100%);
+    border: none;
+    padding: 12px 35px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: var(--white);
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(246, 138, 10, 0.4);
+    color: var(--white);
+}
+
+.btn-submit i {
+    font-size: 1rem;
+}
+
+/* Cancel Button (optional) */
+.btn-cancel {
+    background: transparent;
+    border: 1px solid var(--border-light);
+    padding: 12px 35px;
+    border-radius: 50px;
+    font-weight: 600;
+    color: var(--gray-medium);
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    margin-left: 1rem;
+}
+
+.btn-cancel:hover {
+    border-color: var(--orange-primary);
+    color: var(--orange-primary);
+    transform: translateY(-2px);
+}
+
+/* Error Messages */
+.error-message {
+    color: var(--danger);
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.success-message {
+    color: var(--success);
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* Animation for page load */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.edit-container {
+    animation: fadeInUp 0.4s ease-out;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--gray-light);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--orange-primary);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--orange-gradient-end);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem 0;
+    }
+
+    .edit-header {
+        padding: 1.5rem;
+    }
+
+    .edit-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .edit-header i {
+        font-size: 2.5rem;
+    }
+
+    .edit-card {
+        padding: 1.5rem;
+    }
+
+    .form-row {
+        flex-direction: column;
+        margin-bottom: 1.25rem;
+    }
+
+    .form-label-custom {
+        margin-bottom: 0.5rem;
+        font-size: 0.85rem;
+    }
+
+    .form-control-custom {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    .radio-group {
+        gap: 1rem;
+    }
+
+    .btn-submit, .btn-cancel {
+        padding: 10px 25px;
+        font-size: 0.9rem;
+        width: 100%;
+        justify-content: center;
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
+
+    .offset-sm-4 {
+        margin-left: 0;
+    }
+
+    .button-group {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .btn-submit, .btn-cancel, .edit-header {
+        display: none;
+    }
+
+    .edit-card {
+        box-shadow: none;
+        padding: 0;
+    }
+}
+
+/* Input validation styles */
+.form-control-custom:invalid {
+    border-color: var(--border-light);
+}
+
+.form-control-custom:invalid:focus {
+    border-color: var(--orange-primary);
+}
+
+/* Disabled state */
+.form-control-custom:disabled {
+    background: var(--gray-light);
+    cursor: not-allowed;
+}
+
+/* Loading state for button */
+.btn-submit.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.btn-submit.loading i {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Help text styling */
+.help-text {
+    font-size: 0.75rem;
+    color: var(--gray-medium);
+    margin-top: 0.25rem;
+}
+
+.help-text i {
+    margin-right: 4px;
+    font-size: 0.7rem;
+}

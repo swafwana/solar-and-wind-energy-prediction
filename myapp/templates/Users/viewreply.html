@@ -1,67 +1,190 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#  <meta charset="UTF-8">#}
+{#  <title>View Replies</title>#}
+{#  <!-- Bootstrap 5 CSS -->#}
+{#  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">#}
+{#  <!-- DataTables CSS -->#}
+{#  <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">#}
+{#     <link href="/static/user/css/viewreply.css" rel="stylesheet">#}
+{#</head>#}
+{#<body>#}
+{#  <div class="container mt-5">#}
+{#    <h3 class="mb-4">View Replies</h3>#}
+{##}
+{#    <!-- Date Filter Inputs -->#}
+{#    <div class="row mb-3">#}
+{#      <div class="col-md-4">#}
+{#        <label for="fromDate" class="form-label">From Date</label>#}
+{#        <input type="date" id="fromDate" name="fromDate" class="form-control">#}
+{#      </div>#}
+{#      <div class="col-md-4">#}
+{#        <label for="toDate" class="form-label">To Date</label>#}
+{#        <input type="date" id="toDate" name="toDate" class="form-control">#}
+{#      </div>#}
+{#    </div>#}
+{##}
+{#    <!-- Complaints Table -->#}
+{#    <div class="table-responsive">#}
+{#      <table class="table table-bordered table-hover" id="complaintTable">#}
+{#        <thead class="table-light">#}
+{#          <tr>#}
+{#            <th>Sl. No.</th>#}
+{#            <th>Date</th>#}
+{##}
+{#            <th>Complaint</th>#}
+{#           <th>Reply</th>#}
+{#              <th>Status</th>#}
+{#          </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#          <!-- Sample Data Rows -->#}
+{##}
+{#          {% for i in c %}#}
+{##}
+{#          <tr>#}
+{#            <td>{{ forloop.counter }}</td>#}
+{#            <td>{{ i.date }}</td>#}
+{##}
+{#            <td>{{ i.complaint }}</td>#}
+{#<td>#}
+{##}
+{#                {{ i.reply }}#}
+{#            </td>#}
+{#          <td> {{ i.status }}</td>#}
+{#          </tr>#}
+{#         {% endfor %}#}
+{#          <!--#}
+{##}
+{##}
+{#          <!-- Add more rows as needed -->#}
+{#        </tbody>#}
+{#      </table>#}
+{#    </div>#}
+{#  </div>#}
+{##}
+{#  <!-- Scripts -->#}
+{#  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>#}
+{#  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>#}
+{#  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>#}
+{##}
+{#  <script>#}
+{#    // Extend DataTables with custom date filtering#}
+{#    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {#}
+{#      const min = document.getElementById('fromDate').value;#}
+{#      const max = document.getElementById('toDate').value;#}
+{#      const dateStr = data[1]; // Date is column index 1#}
+{#      const date = new Date(dateStr);#}
+{##}
+{#      const minDate = min ? new Date(min) : null;#}
+{#      const maxDate = max ? new Date(max) : null;#}
+{##}
+{#      if ((!minDate || date >= minDate) && (!maxDate || date <= maxDate)) {#}
+{#        return true;#}
+{#      }#}
+{#      return false;#}
+{#    });#}
+{##}
+{#    // Initialize DataTable and bind filter events#}
+{#    $(document).ready(function () {#}
+{#      const table = $('#complaintTable').DataTable({#}
+{#        pageLength: 5#}
+{#      });#}
+{##}
+{#      $('#fromDate, #toDate').on('change', function () {#}
+{#        table.draw();#}
+{#      });#}
+{#    });#}
+{#  </script>#}
+{#</body>#}
+{#</html>#}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>View Replies</title>
   <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- DataTables CSS -->
   <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-     <link href="/static/user/css/viewreply.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Custom CSS -->
+  <link href="/static/user/css/viewreply.css" rel="stylesheet">
 </head>
 <body>
-  <div class="container mt-5">
-    <h3 class="mb-4">View Replies</h3>
+  <div class="container">
+    <!-- Simple Header - No big heading -->
+    <h3>
+      <i class="fas fa-reply-all"></i> View Replies
+    </h3>
 
-    <!-- Date Filter Inputs -->
-    <div class="row mb-3">
-      <div class="col-md-4">
-        <label for="fromDate" class="form-label">From Date</label>
-        <input type="date" id="fromDate" name="fromDate" class="form-control">
-      </div>
-      <div class="col-md-4">
-        <label for="toDate" class="form-label">To Date</label>
-        <input type="date" id="toDate" name="toDate" class="form-control">
+    <!-- Date Filter - Matching form card style -->
+    <div class="filter-section">
+      <div class="row">
+        <div class="col-md-4">
+          <label><i class="fas fa-calendar-alt"></i> From Date</label>
+          <input type="date" id="fromDate" class="form-control">
+        </div>
+        <div class="col-md-4">
+          <label><i class="fas fa-calendar-check"></i> To Date</label>
+          <input type="date" id="toDate" class="form-control">
+        </div>
       </div>
     </div>
 
-    <!-- Complaints Table -->
+    <!-- Table -->
     <div class="table-responsive">
-      <table class="table table-bordered table-hover" id="complaintTable">
-        <thead class="table-light">
+      <table class="table" id="complaintTable">
+        <thead>
           <tr>
             <th>Sl. No.</th>
             <th>Date</th>
-
-            <th>Complaint</th>
-           <th>Reply</th>
-              <th>Status</th>
+            <th>Feedback</th>
+            <th>Reply</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
-          <!-- Sample Data Rows -->
-
           {% for i in c %}
-
           <tr>
             <td>{{ forloop.counter }}</td>
             <td>{{ i.date }}</td>
-
-            <td>{{ i.complaint }}</td>
-<td>
-
-                {{ i.reply }}
+            <td class="complaint-text">{{ i.complaint }}</td>
+            <td>
+              {% if i.reply %}
+                <div class="reply-box">{{ i.reply }}</div>
+              {% else %}
+                <span class="badge-status badge-pending">No reply yet</span>
+              {% endif %}
             </td>
-          <td> {{ i.status }}</td>
+            <td>
+              {% if i.status == "Resolved" %}
+                <span class="badge-status badge-resolved">
+                  <i class="fas fa-check-circle"></i> Resolved
+                </span>
+              {% elif i.status == "Replied" %}
+                <span class="badge-status badge-replied">
+                  <i class="fas fa-reply"></i> Replied
+                </span>
+              {% else %}
+                <span class="badge-status badge-pending">
+                  <i class="fas fa-clock"></i> Pending
+                </span>
+              {% endif %}
+            </td>
           </tr>
-         {% endfor %}
-          <!--
-
-
-          <!-- Add more rows as needed -->
+          {% endfor %}
         </tbody>
       </table>
     </div>
+
+    <!-- Back Button -->
+    <a href="javascript:history.back()" class="back-button">
+      <i class="fas fa-arrow-left"></i> Go Back
+    </a>
   </div>
 
   <!-- Scripts -->
@@ -70,11 +193,11 @@
   <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
   <script>
-    // Extend DataTables with custom date filtering
+    // Date filter for DataTables
     $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
       const min = document.getElementById('fromDate').value;
       const max = document.getElementById('toDate').value;
-      const dateStr = data[1]; // Date is column index 1
+      const dateStr = data[1];
       const date = new Date(dateStr);
 
       const minDate = min ? new Date(min) : null;
@@ -86,10 +209,17 @@
       return false;
     });
 
-    // Initialize DataTable and bind filter events
     $(document).ready(function () {
       const table = $('#complaintTable').DataTable({
-        pageLength: 5
+        pageLength: 10,
+        order: [[1, 'desc']],
+        language: {
+          search: "Search:",
+          lengthMenu: "Show _MENU_ entries",
+          info: "Showing _START_ to _END_ of _TOTAL_ replies",
+          emptyTable: "No replies found",
+          zeroRecords: "No matching replies found"
+        }
       });
 
       $('#fromDate, #toDate').on('change', function () {
