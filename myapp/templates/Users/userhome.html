@@ -188,9 +188,9 @@
                                     <div>
                                         <span class="badge bg-primary rounded-pill">
                                             {% if pred.prediction_type == "solar" %}
-                                                {{ pred.result|floatformat:1 }} kWh
+                                                {{ pred.result|floatformat:1 }} kW
                                             {% else %}
-                                                {{ pred.result|floatformat:1 }} MW
+                                                {{ pred.result|floatformat:1 }} kW
                                             {% endif %}
                                         </span>
                                     </div>

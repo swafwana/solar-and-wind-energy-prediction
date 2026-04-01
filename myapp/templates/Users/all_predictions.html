@@ -84,7 +84,7 @@
                                 <td>
                                     <strong>
                                         {% if pred.prediction_type == "solar" %}
-                                            {{ pred.result|floatformat:2 }} W/m²
+                                            {{ pred.result|floatformat:2 }} kW
                                         {% else %}
                                             {{ pred.result|floatformat:2 }} kW
                                         {% endif %}
