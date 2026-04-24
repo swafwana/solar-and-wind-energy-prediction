@@ -8,6 +8,11 @@ import joblib
 # 1. Load Dataset
 # -----------------------------
 df = pd.read_csv("C://Users//HK Technology//PycharmProjects//solar_and_wind_energy_prediction//myapp//Dataset//Wind//wind.csv")
+# Clean column names
+df.columns = df.columns.str.strip()
+
+# Check columns
+print(df.columns)
 
 # -----------------------------
 # 2. Convert Time Column
@@ -16,6 +21,8 @@ df["Time"] = pd.to_datetime(df["Time"])
 df["hour"] = df["Time"].dt.hour
 df["month"] = df["Time"].dt.month
 
+# Use correct column name here
+df["Time"] = pd.to_datetime(df["Time"])
 # Drop original Time column
 df = df.drop("Time", axis=1)
 
@@ -66,9 +73,9 @@ import matplotlib.pyplot as plt
 # Actual vs Predicted Plot
 plt.figure()
 plt.scatter(y_test, y_pred)
-plt.xlabel("Actual Power")
-plt.ylabel("Predicted Power")
-plt.title("Actual vs Predicted Power")
+plt.xlabel("Actual Wind Power")
+plt.ylabel("Predicted Wind Power")
+plt.title("Actual vs Predicted Wind Power")
 plt.show()
 
 # Feature Importance Plot

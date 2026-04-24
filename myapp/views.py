@@ -75,7 +75,24 @@ def forgotpassword_post(request):
 # A D M I N--------------------------------
 @login_required(login_url="/myapp/loginindex_get/")
 def admin_home(request):
-    return render(request,'admins/adminhomeindex.html')
+
+    # Total solar predictions
+    solar_count = Log.objects.filter(prediction_type="solar").count()
+
+    # Total wind predictions
+    wind_count = Log.objects.filter(prediction_type="wind").count()
+
+    # Registered users
+    user_count = Users.objects.count()
+
+    context = {
+        'solar_count': solar_count,
+        'wind_count': wind_count,
+        'user_count': user_count,
+        'system_status': 'Operational'
+    }
+
+    return render(request, 'admins/adminhomeindex.html', context)
 
 def viewcomplaint_get(request):
     data=Complaint.objects.all()

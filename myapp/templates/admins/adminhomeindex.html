@@ -90,10 +90,10 @@
                     </div>
                     <div class="nav-bar px-0 py-lg-0" style="height: 80px;">
                         <nav class="navbar navbar-expand-lg navbar-light d-flex justify-content-lg-end">
-                            <a href="#" class="navbar-brand-2">
-                                <h1 class="text-primary mb-0"><i class="fas fa-bolt"></i> Electra</h1>
-                                <!-- <img src="img/logo.png" alt="Logo"> -->
-                            </a>
+{#                            <a href="#" class="navbar-brand-2">#}
+{#                                <h1 class="text-primary mb-0"><i class="fas fa-bolt"></i> Electra</h1>#}
+{#                                <!-- <img src="img/logo.png" alt="Logo"> -->#}
+{#                            </a>#}
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                                 <span class="fa fa-bars"></span>
                             </button>
@@ -141,36 +141,40 @@
 
         <h3 class="text-primary mb-4">System Overview</h3>
 
-        <!-- Stats Row -->
-        <div class="row g-4 mb-5">
-            <div class="col-md-3">
+        <div class="row">
+
+            <div class="col-lg-3 col-md-6 mb-4">
                 <div class="bg-white shadow-sm rounded p-4 text-center">
                     <h6>Total Solar Records</h6>
-                    <h4 class="mb-0">12,450</h4>
+                    <h4>{{ solar_count }}</h4>
                 </div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-lg-3 col-md-6 mb-4">
                 <div class="bg-white shadow-sm rounded p-4 text-center">
                     <h6>Total Wind Records</h6>
-                    <h4 class="mb-0">9,870</h4>
+                    <h4>{{ wind_count }}</h4>
                 </div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-lg-3 col-md-6 mb-4">
                 <div class="bg-white shadow-sm rounded p-4 text-center">
                     <h6>Registered Users</h6>
-                    <h4 class="mb-0">54</h4>
+                    <h4>{{ user_count }}</h4>
                 </div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-lg-3 col-md-6 mb-4">
                 <div class="bg-white shadow-sm rounded p-4 text-center">
                     <h6>System Status</h6>
-                    <h4 class="text-success mb-0">Operational</h4>
+                    <h4 class="text-success">{{ system_status }}</h4>
                 </div>
             </div>
+
         </div>
+
+    </div>
+</div>
 
         <!-- Model Status -->
         <div class="row g-4">

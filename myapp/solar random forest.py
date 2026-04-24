@@ -5,7 +5,7 @@ from sklearn.metrics import r2_score, mean_absolute_error
 import joblib
 
 # Load dataset
-df = pd.read_csv("C://Users//HK Technology//PycharmProjects//solar_and_wind_energy_prediction//myapp//Dataset//Solar//preprocessed.csv")
+df = pd.read_csv("C://Users//HK Technology//PycharmProjects//solar_and_wind_energy_prediction//myapp//Dataset//Solar//preprocessed1.csv")
 
 # Convert Timestamp
 df["Timestamp"] = pd.to_datetime(df["Timestamp"])
